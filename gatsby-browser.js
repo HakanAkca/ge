@@ -1,2 +1,2 @@
-import "./src/styles/global.css"
+import "./src/styles/Global.css"
 import "@fontsource/roboto"
