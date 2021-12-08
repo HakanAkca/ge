@@ -4,9 +4,9 @@ import { Grid, Button } from "@mui/material";
 import classnames from "classnames";
 import GenericText from "./components/GenericText";
 
-import homeHeaderImage from "../../assets/homeHeaderImage.svg";
+import homeHeaderImage from "../images/homeHeaderImage.png";
 import bari from "../../assets/bari.svg";
-import house from "../../assets/house.svg";
+import gevy from "../images/gevy.png";
 import NavBar from "./components/NavBar";
 
 const IndexPage = () => {
@@ -17,7 +17,7 @@ const IndexPage = () => {
         <Grid item xs={12}>
           <img src={homeHeaderImage} style={{ width: "100%" }} />
         </Grid>
-        <Grid item className={containerStyle}>
+        <Grid item className={globalPaddingStyle}>
           <Grid>
             <h1>Optez pour un bar à Caviar !</h1>
             <GenericText className={textStyle}>
@@ -27,7 +27,6 @@ const IndexPage = () => {
               Events Paris. Car le caviar c’est vivre l’instant avec Art !
             </GenericText>
           </Grid>
-          <Grid></Grid>
         </Grid>
         <Grid
           item
@@ -36,15 +35,20 @@ const IndexPage = () => {
           flexDirection="column"
           justifyContent="center"
           alignItems="center"
-          className={classnames(containerStyle, customBlueBackground)}
+          className={classnames(
+            containerStyle,
+            customBlueBackground,
+            globalPaddingStyle
+          )}
         >
-          <Grid item display="flex" xs={12} sm={8} md={8}>
+          <Grid item xs={12}>
             <GenericText
               className={classnames(textStyle, customWhiteTextStyle)}
             >
               Nous sélectionnons rigoureusement nos caviars issus d’élevage du
-              monde entier. Spécialiste du bar à Caviar, Gourmet Events Paris
-              vous accompagne pour choisir parmis plusieurs variétés proposées.
+              monde entier. <br />
+              Spécialiste du bar à Caviar, Gourmet Events Paris vous accompagne
+              pour choisir parmis plusieurs variétés proposées.
             </GenericText>
           </Grid>
           <Grid container>
@@ -70,7 +74,7 @@ const IndexPage = () => {
               md={4}
             >
               <img src={bari} style={{ width: "241px" }} />
-              <GenericText>BARI</GenericText>
+              <GenericText>Osciètre</GenericText>
             </Grid>
             <Grid
               display="flex"
@@ -82,31 +86,50 @@ const IndexPage = () => {
               md={4}
             >
               <img src={bari} style={{ width: "241px" }} />
-              <GenericText>BARI</GenericText>
+              <GenericText>Schrenki</GenericText>
             </Grid>
           </Grid>
-          <Button variant="outlined">DÉCOUVEZ NOS CAVIARDS</Button>
+          <Grid item>
+            <Button
+              style={{
+                marginTop: 50,
+                backgroundColor: "#D99D55",
+                color: "#FFFFFF",
+                borderRadius: 0,
+                width: 340,
+                height: 50,
+              }}
+              variant="outlined"
+            >
+              DÉCOUVEZ NOS CAVIARDS
+            </Button>
+          </Grid>
         </Grid>
 
         <Grid container className={containerStyle}>
-          <Grid
-            item
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            xs={12}
-            sm={7}
-            md={7}
-            lg={3}
-          >
-            <img src={house} />
-          </Grid>
-          <Grid item xs={12} sm={4} md={2} lg={8}>
-            <h1>Notre maison</h1>
+          <Grid item xs={12} className={globalPaddingStyle}>
+            <img
+              style={{ float: "left", marginRight: 20 }}
+              src={gevy}
+              alt="Pineapple"
+            />
+            <h1 style={{ marginTop: 0 }}>La fondatrice</h1>
             <GenericText className={textStyle}>
-              jvbzrjf pi anzbefpvbvpnpkefnzdkpvb nfzkp vb nennv b jkdsbizhe
-              hvnaaf vhbjzhei hhbebb jsnvbhriuhe `fdbzéjvibgz, vhsizgbrfifv
-              dhvzbzs dvneikaoa vhnzbag b dpvhza o v janbgkzi
+              Riche d’une expérience professionnelle internationale, la
+              créatrice de Gourmet Events a toujours côtoyé les univers raffinés
+              du luxe et de la gastronomie. <br />
+              <br /> Son histoire personnelle, sa curiosité et sa générosité
+              sont à l’origine de son désir de partager son amour de la perle
+              noire... <br />
+              <br /> C’est donc à travers l’atmosphère festive de son concept de
+              bar à caviar qu’elle proposera à vos convives une expérience
+              gustative mémorable.
+              <br />
+              <br /> Avec un service à la royale Gourmet Events met à l’honneur
+              le diamant noir car nul besoin d’apparat pour ce précieux met ;
+              quelques grains déposés sur le dos de votre main en guise d’écrin
+              feront voyager vos papilles. Le goût brut de l’instant...la saveur
+              de l’éternité à fleur de peau ...
             </GenericText>
           </Grid>
         </Grid>
@@ -114,6 +137,10 @@ const IndexPage = () => {
     </div>
   );
 };
+
+const globalPaddingStyle = style({
+  padding: 50,
+});
 
 const containerStyle = style({
   padding: "28px 28px 28px 28px",
@@ -125,14 +152,20 @@ const customBlueBackground = style({
 
 const textStyle = style({
   color: "black",
-  fontSize: 18,
-  font: "Roboto",
+  fontSize: 22,
+  fontFamily: "Roboto",
   fontWeight: 400,
   textAlign: "justify",
 });
 
 const customWhiteTextStyle = style({
   color: "#FFFFFF",
+  fontSize: 24,
+  textAlign: "center",
+});
+
+const spaceTextStyle = style({
+  marginTop: 25,
 });
 
 export default IndexPage;

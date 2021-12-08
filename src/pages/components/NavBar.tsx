@@ -60,7 +60,7 @@ export default function Navbar() {
         <Link
           activeClassName={activeClassStyle}
           className={rc_nav_a}
-          to="/dashboard"
+          to="/contact"
         >
           Contact
         </Link>

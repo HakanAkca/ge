@@ -16,6 +16,7 @@ import detailsHeaderImage from "../../../assets/detailsHeaderImage.svg";
 import caviar from "../../../assets/caviar.svg";
 import bari from "../../../assets/bari.svg";
 import NavBar from "../components/NavBar";
+import classnames from "classnames";
 
 interface Props {
   children: React.ReactNode;
@@ -120,7 +121,46 @@ export default function Details() {
           <img src={caviar} />
         </Grid>
       </Grid>
-      <FadeInWhenVisible>
+      <div style={{ backgroundColor: "#0F0F20" }}>
+        <FadeInWhenVisible>
+          <Grid container className={caviarDetailsContainer}>
+            <Grid
+              item
+              display="flex"
+              alignItems="center"
+              justifyContent="center"
+              xs={12}
+              sm={3}
+              md={3}
+              lg={3}
+            >
+              <img src={bari} style={{ width: "141px" }} />
+            </Grid>
+            <Grid item xs={12} sm={8} md={9} lg={8}>
+              <h1 className={titleStyle}>Caviar Bari</h1>
+              <GenericText
+                className={classnames(textStyle, customWhiteTextStyle)}
+              >
+                Le caviar Baeri est issu de l’esturgeon Sibérien Acipenser
+                Baeri. Mesurant 0,5m à 1m en captivité pour un poids de 7Kg à
+                30Kg. Il peut atteindre une taille de 3m à l’état sauvage. Il
+                faut 5 à 7 ans pour que les premiers grains apparaissent. C’est
+                l’espèce la plus répandue en Europe. En France, le caviar
+                d’Aquitaine est produit à partir de cetet espèce. Le caviar
+                Baeri a des petits grains qui se détachent aisement avec une
+                texture délicate. Ses nuances sont de couleurs assez sombres au
+                goût minéral franc et iodé.
+              </GenericText>
+            </Grid>
+          </Grid>
+        </FadeInWhenVisible>
+        <Grid item xs={12} display="flex" justifyContent="center">
+          <Divider
+            variant="middle"
+            style={{ width: "80%", backgroundColor: "white" }}
+          />
+        </Grid>
+
         <Grid container className={caviarDetailsContainer}>
           <Grid
             item
@@ -135,84 +175,59 @@ export default function Details() {
             <img src={bari} style={{ width: "141px" }} />
           </Grid>
           <Grid item xs={12} sm={8} md={9} lg={8}>
-            <h1 className={titleStyle}>Caviar Bari</h1>
-            <GenericText className={textStyle}>
-              Le caviar Baeri est issu de l’esturgeon Sibérien Acipenser Baeri.
-              Mesurant 0,5m à 1m en captivité pour un poids de 7Kg à 30Kg. Il
-              peut atteindre une taille de 3m à l’état sauvage. Il faut 5 à 7
-              ans pour que les premiers grains apparaissent. C’est l’espèce la
-              plus répandue en Europe. En France, le caviar d’Aquitaine est
-              produit à partir de cetet espèce. Le caviar Baeri a des petits
-              grains qui se détachent aisement avec une texture délicate. Ses
-              nuances sont de couleurs assez sombres au goût minéral franc et
-              iodé.
+            <h1 className={titleStyle}>Caviar Oscietre</h1>
+            <GenericText
+              className={classnames(textStyle, customWhiteTextStyle)}
+            >
+              Le caviar Osciètre est issu de l’esturgeon Guidenstaedti et
+              Acipenser et Persicus. Ce poisson est endémique de la mer
+              Caspienne et la mer noire. Il a une taille moyenne mesurant de
+              1,5m à 2m. Son poids varie de 80Kg à 200Kg. Il faut 8 à 9ans pour
+              élever cet esturgeons à maturité sexuelle. Ses grains délivrés
+              sont moyens, fermes et fondants à la fois. La couleur de ce caviar
+              peut aller d’un gris anthracite à une couleur mordoré. Sa saveur
+              particulièrement délicate présente des notes de noisette avec une
+              belle longueur en bouche.
             </GenericText>
           </Grid>
         </Grid>
-      </FadeInWhenVisible>
-      <Grid item xs={12} display="flex" justifyContent="center">
-        <Divider variant="middle" style={{ width: "80%" }} />
-      </Grid>
-
-      <Grid container className={caviarDetailsContainer}>
-        <Grid
-          item
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          xs={12}
-          sm={3}
-          md={3}
-          lg={3}
-        >
-          <img src={bari} style={{ width: "141px" }} />
+        <Grid item xs={12} display="flex" justifyContent="center">
+          <Divider
+            variant="middle"
+            style={{ width: "80%", backgroundColor: "white" }}
+          />
         </Grid>
-        <Grid item xs={12} sm={8} md={9} lg={8}>
-          <h1 className={titleStyle}>Caviar Oscietre</h1>
-          <GenericText className={textStyle}>
-            Le caviar Osciètre est issu de l’esturgeon Guidenstaedti et
-            Acipenser et Persicus. Ce poisson est endémique de la mer Caspienne
-            et la mer noire. Il a une taille moyenne mesurant de 1,5m à 2m. Son
-            poids varie de 80Kg à 200Kg. Il faut 8 à 9ans pour élever cet
-            esturgeons à maturité sexuelle. Ses grains délivrés sont moyens,
-            fermes et fondants à la fois. La couleur de ce caviar peut aller
-            d’un gris anthracite à une couleur mordoré. Sa saveur
-            particulièrement délicate présente des notes de noisette avec une
-            belle longueur en bouche.
-          </GenericText>
+        <Grid container className={caviarDetailsContainer}>
+          <Grid
+            item
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            xs={12}
+            sm={3}
+            md={3}
+            lg={3}
+          >
+            <img src={bari} style={{ width: "141px" }} />
+          </Grid>
+          <Grid item xs={12} sm={8} md={8} lg={8}>
+            <h1 className={titleStyle}> Caviar Schrenki </h1>
+            <GenericText
+              className={classnames(textStyle, customWhiteTextStyle)}
+            >
+              Le caviar Schrenki est issu de l’esturgeon Acipenser Dauricus
+              Schrenki. Ce poisson vit à l’état dauvage sur le fleuve Amour
+              séparant la Russie de la Chine. Sa taille varie de 1,2m à 2m et
+              son poids peut atteindre plus de 100Kg. Il atteint sa maturité
+              sexuelle en élevage autour des 9ans, période nécessaire pour nous
+              délivrer un caviar envoutant et unique. Ses grains sont de taille
+              moyenne et fermes arborant une sublime couleur dorée. Faiblement
+              iodé et peu salé, il séduit par ses notes sensuelles. Un produit
+              d’exception qui a la faveur des grands chefs.
+            </GenericText>
+          </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={12} display="flex" justifyContent="center">
-        <Divider variant="middle" style={{ width: "80%" }} />
-      </Grid>
-      <Grid container className={caviarDetailsContainer}>
-        <Grid
-          item
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          xs={12}
-          sm={3}
-          md={3}
-          lg={3}
-        >
-          <img src={bari} style={{ width: "141px" }} />
-        </Grid>
-        <Grid item xs={12} sm={8} md={8} lg={8}>
-          <h1 className={titleStyle}> Caviar Schrenki </h1>
-          <GenericText className={textStyle}>
-            Le caviar Schrenki est issu de l’esturgeon Acipenser Dauricus
-            Schrenki. Ce poisson vit à l’état dauvage sur le fleuve Amour
-            séparant la Russie de la Chine. Sa taille varie de 1,2m à 2m et son
-            poids peut atteindre plus de 100Kg. Il atteint sa maturité sexuelle
-            en élevage autour des 9ans, période nécessaire pour nous délivrer un
-            caviar envoutant et unique. Ses grains sont de taille moyenne et
-            fermes arborant une sublime couleur dorée. Faiblement iodé et peu
-            salé, il séduit par ses notes sensuelles. Un produit d’exception qui
-            a la faveur des grands chefs.
-          </GenericText>
-        </Grid>
-      </Grid>
+      </div>
     </Grid>
   );
 }
@@ -231,4 +246,8 @@ const textStyle = style({
 
 const caviarDetailsContainer = style({
   padding: "28px 28px 28px 28px",
+});
+
+const customWhiteTextStyle = style({
+  color: "#FFFFFF",
 });
