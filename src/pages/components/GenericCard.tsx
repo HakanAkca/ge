@@ -22,7 +22,7 @@ const GenericCard = ({ cover, images }: GenericCardProps) => {
       <CardActionArea href="https://google.com">
         <CardMedia
           component="img"
-          height="240"
+          height="308px"
           alt="green iguana"
           src={detailsHeaderImage}
           className="imageStyle"
