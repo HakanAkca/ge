@@ -8,6 +8,7 @@ import homeHeaderImage from "../images/homeHeaderImage.png";
 import bari from "../../assets/bari.svg";
 import gevy from "../images/gevy.png";
 import NavBar from "./components/NavBar";
+import InstagramImage from "./components/InstagramImage";
 
 const IndexPage = () => {
   return (
@@ -134,6 +135,7 @@ const IndexPage = () => {
           </Grid>
         </Grid>
       </Grid>
+      <InstagramImage />
     </div>
   );
 };

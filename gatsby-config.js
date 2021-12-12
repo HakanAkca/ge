@@ -12,6 +12,7 @@ module.exports = {
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    "gatsby-plugin-recaptcha",
     {
       resolve: "gatsby-source-filesystem",
       options: {
@@ -36,5 +37,20 @@ module.exports = {
         },
       },
     },
+    {
+      resolve: "gatsby-plugin-firebase",
+      options: {
+        credentials: {
+          appId: "<YOUR_FIREBASE_APP_ID>",
+          apiKey: "AIzaSyASlAHOLbA1XkhdPpj3X9b1JJuqeT519_0",
+          authDomain: "caviar-1ba18.firebaseapp.com",
+          projectId: "caviar-1ba18",
+          storageBucket: "caviar-1ba18.appspot.com",
+          messagingSenderId: "337025320058",
+          appId: "1:337025320058:web:270c8d3f392cba949027c3",
+          measurementId: "G-3FBM6G7FQ7"
+        }
+      }
+    }
   ],
 };
