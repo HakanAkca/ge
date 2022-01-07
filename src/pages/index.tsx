@@ -3,12 +3,14 @@ import { style } from "typestyle";
 import { Grid, Button } from "@mui/material";
 import classnames from "classnames";
 import GenericText from "./components/GenericText";
+import Footer from "./components/GenericFooter";
 
 import homeHeaderImage from "../images/homeHeaderImage.png";
 import bari from "../../assets/bari.svg";
 import gevy from "../images/gevy.png";
 import NavBar from "./components/NavBar";
 import InstagramImage from "./components/InstagramImage";
+import logo from "../images/logo.png";
 
 const IndexPage = () => {
   return (
@@ -18,14 +20,22 @@ const IndexPage = () => {
         <Grid item xs={12}>
           <img src={homeHeaderImage} style={{ width: "100%" }} />
         </Grid>
-        <Grid item className={globalPaddingStyle}>
+        <Grid xs={12} item className={globalPaddingStyle}>
           <Grid>
+            <img
+              style={{ float: "right", marginRight: 20 }}
+              src={logo}
+              alt="Logo caviar"
+            />
             <h1>Optez pour un bar à Caviar !</h1>
             <GenericText className={textStyle}>
               Notre maison vous accompagne pour célébrer vos événements d’ordre
-              privé ou corporate. Une aventure d’exception qui restera gravée
-              dans l’esprit de vos convives. Tel est l’objectif de Gourmet
-              Events Paris. Car le caviar c’est vivre l’instant avec Art !
+              privé ou corporate. <br />
+              <br />
+              Une aventure d’exception qui restera gravée dans l’esprit de vos
+              convives. Tel est l’objectif de Gourmet Events Paris.
+              <br />
+              <br /> Car le caviar c’est vivre l’instant avec Art !
             </GenericText>
           </Grid>
         </Grid>
@@ -47,7 +57,8 @@ const IndexPage = () => {
               className={classnames(textStyle, customWhiteTextStyle)}
             >
               Nous sélectionnons rigoureusement nos caviars issus d’élevage du
-              monde entier. <br />
+              monde entier.
+              <br />
               Spécialiste du bar à Caviar, Gourmet Events Paris vous accompagne
               pour choisir parmis plusieurs variétés proposées.
             </GenericText>
@@ -61,9 +72,10 @@ const IndexPage = () => {
               flexDirection="column"
               alignItems="center"
               justifyContent="center"
+              style={{ marginTop: 25 }}
             >
               <img src={bari} style={{ width: "241px" }} />
-              <GenericText>BARI</GenericText>
+              <GenericText className={caviarTextStyle}>BARI</GenericText>
             </Grid>
             <Grid
               display="flex"
@@ -75,7 +87,7 @@ const IndexPage = () => {
               md={4}
             >
               <img src={bari} style={{ width: "241px" }} />
-              <GenericText>Osciètre</GenericText>
+              <GenericText className={caviarTextStyle}>Osciètre</GenericText>
             </Grid>
             <Grid
               display="flex"
@@ -87,7 +99,7 @@ const IndexPage = () => {
               md={4}
             >
               <img src={bari} style={{ width: "241px" }} />
-              <GenericText>Schrenki</GenericText>
+              <GenericText className={caviarTextStyle}>Schrenki</GenericText>
             </Grid>
           </Grid>
           <Grid item>
@@ -136,6 +148,7 @@ const IndexPage = () => {
         </Grid>
       </Grid>
       <InstagramImage />
+      <Footer />
     </div>
   );
 };
@@ -157,7 +170,6 @@ const textStyle = style({
   fontSize: 22,
   fontFamily: "Roboto",
   fontWeight: 400,
-  textAlign: "justify",
 });
 
 const customWhiteTextStyle = style({
@@ -168,6 +180,12 @@ const customWhiteTextStyle = style({
 
 const spaceTextStyle = style({
   marginTop: 25,
+});
+
+const caviarTextStyle = style({
+  color: "#D99D55",
+  fontFamily: "Cookie",
+  fontSize: "48px",
 });
 
 export default IndexPage;

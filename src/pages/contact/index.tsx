@@ -7,6 +7,7 @@ import {
   Checkbox,
   FormControlLabel,
   Button,
+  TextField,
 } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import GenericText from "../components/GenericText";
@@ -23,6 +24,8 @@ import { useInView } from "react-intersection-observer";
 import NavBar from "../components/NavBar";
 import detailsHeaderImage from "../../../assets/detailsHeaderImage.svg";
 import { Formik } from "formik";
+import Footer from "../components/GenericFooter";
+import emailjs from "emailjs-com";
 
 interface Props {
   children: React.ReactNode;
@@ -59,10 +62,10 @@ export default function Contact() {
   const [shouldShowActions, setShouldShowActions] = React.useState(false);
   const [imageHeight, getImageHeight] = React.useState<number>(0);
   const ref = React.useRef<HTMLImageElement>(null);
-  const [age, setAge] = React.useState(50);
+  const [numb, setNumber] = React.useState(50);
   const [part, setPart] = React.useState(false);
   const [pro, setPro] = React.useState(false);
-  const [eventType, setEventType] = React.useState("dejeuner");
+  const [eventType, setEventType] = React.useState("Dejeuner");
   // const [pro, setPro] = React.useState(false);
 
   React.useEffect(() => {
@@ -89,149 +92,267 @@ export default function Contact() {
   const yRange = useTransform(scrollY, [imageHeight - offsetHeight, 0], [0, 1]);
   const opacity = useSpring(yRange, { stiffness: 400, damping: 40 });
 
-  const handleChangeAge = (event) => {
-    console.log(event);
-    setAge(event.target.value);
+  const handleChangeNumber = (event, setFieldValue) => {
+    setNumber(event.target.value);
+    setFieldValue("numberOfPerson", event.target.value);
   };
 
-  const handleChangePart = (event) => {
-    console.log(event);
-    setPart(event.target.checked);
+  const firstFormHandleChangePart = (setFieldValue) => {
+    setPart(!part);
+    setFieldValue("pro", true);
+    setFieldValue("typePerson", "Particulier");
   };
 
-  const handleChangeEventType = (event) => {
-    console.log(event);
-    setEventType(event.target.checked);
+  const firstFormHandleChangePro = (setFieldValue) => {
+    setPro(!pro);
+    setFieldValue("pro", true);
+    setFieldValue("typePerson", "Professionel");
+  };
+
+  const firstFormHandleChangeAdditionalText = (event, setFieldValue) => {
+    setFieldValue("additional", event.target.value);
+  };
+
+  const handleChangeEventType = (event, setFieldValue) => {
+    setEventType(event.target.value);
+    setFieldValue("eventType", event.target.value);
+  };
+
+  const handleSubmit = (values) => {
+    try {
+      emailjs
+        .send(
+          "service_cf2mg4i",
+          "template_c4kgqb5",
+          values,
+          "user_SbJL0vKhTMtQhu8xgBtOi"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    } catch {
+      console.log("toto");
+    }
   };
 
   return (
-    <Grid container>
-      <NavBar />
-      <Grid item xs={12}>
-        <motion.img
-          ref={ref}
-          src={detailsHeaderImage}
-          style={{ width: "100%", opacity }}
-        />
-      </Grid>
-      <Grid className={marginGridStyle} container justifyContent="space-around">
-        <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
-          <Formik
-            initialValues={{ email: "", password: "" }}
-            onSubmit={(values, { setSubmitting }) => {}}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-              /* and other goodies */
-            }) => (
-              <form onSubmit={handleSubmit}>
-                <h1>Demander un devis</h1>
-                <InputLabel>Vous êtes :</InputLabel>
-                <FormControlLabel
-                  onChange={(event) => handleChangePart(event)}
-                  control={<Checkbox />}
-                  labelPlacement="start"
-                  label="Un particulier"
-                />
-                <FormControlLabel
-                  onChange={(event) => handleChangePart(event)}
-                  control={<Checkbox />}
-                  labelPlacement="start"
-                  label="Un professionel"
-                />
-
-                <InputLabel>Type d’événement :</InputLabel>
-                <Select
-                  fullWidth
-                  // style={{ width: 300 }}
-                  label="Nombres de personnes :"
-                  value={eventType}
-                  onChange={(event) => handleChangeEventType(event)}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={"dejeuner"}>Dejeuner</MenuItem>
-                  <MenuItem value={100}>50-100</MenuItem>
-                  <MenuItem value={200}>100-200</MenuItem>
-                </Select>
-
-                <InputLabel>Nombres de personnes :</InputLabel>
-                <Select
-                  fullWidth
-                  // style={{ width: 300 }}
-                  label="Nombres de personnes :"
-                  value={age}
-                  onChange={(event) => handleChangeAge(event)}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={50}>0-50</MenuItem>
-                  <MenuItem value={100}>50-100</MenuItem>
-                  <MenuItem value={200}>100-200</MenuItem>
-                </Select>
-                <Button variant="contained">Contained</Button>
-              </form>
-            )}
-          </Formik>
+    <>
+      <Grid container>
+        <NavBar />
+        <Grid item xs={12}>
+          <motion.img
+            ref={ref}
+            src={detailsHeaderImage}
+            style={{ width: "100%", opacity }}
+          />
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
-          <Formik
-            initialValues={{ email: "", password: "" }}
-            onSubmit={(values, { setSubmitting }) => {}}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-              /* and other goodies */
-            }) => (
-              <form onSubmit={handleSubmit}>
-                <h1>Contactez-nous</h1>
-                <InputLabel>Vous êtes :</InputLabel>
-                <FormControlLabel
-                  onChange={(event) => handleChangePart(event)}
-                  control={<Checkbox />}
-                  labelPlacement="start"
-                  label="Un particulier"
-                />
-                <FormControlLabel
-                  onChange={(event) => handleChangePart(event)}
-                  control={<Checkbox />}
-                  labelPlacement="start"
-                  label="Un professionel"
-                />
-                <InputLabel>Nombres de personnes :</InputLabel>
-                <Select
-                  fullWidth
-                  label="Nombres de personnes :"
-                  value={age}
-                  onChange={(event) => handleChangeAge(event)}
-                >
-                  <MenuItem value="">
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={50}>0-50</MenuItem>
-                  <MenuItem value={100}>50-100</MenuItem>
-                  <MenuItem value={200}>100-200</MenuItem>
-                </Select>
-              </form>
-            )}
-          </Formik>
+        <Grid
+          className={marginGridStyle}
+          container
+          justifyContent="space-around"
+        >
+          <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
+            <Formik
+              initialValues={{
+                firstname: "",
+                lastname: "",
+                email: "",
+                part: false,
+                pro: false,
+                eventType: "dejeuner",
+                numberOfPerson: null,
+                additional: "",
+                typePerson: "",
+              }}
+              onSubmit={(values) => {
+                handleSubmit(values);
+              }}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                setFieldValue,
+                isSubmitting,
+                /* and other goodies */
+              }) => (
+                <form onSubmit={handleSubmit}>
+                  <h1>Demander un devis</h1>
+                  <InputLabel>Vous êtes :</InputLabel>
+                  <FormControlLabel
+                    onChange={() => firstFormHandleChangePart(setFieldValue)}
+                    control={<Checkbox />}
+                    labelPlacement="start"
+                    label="Un particulier"
+                    value={values.part}
+                    name="part"
+                  />
+                  <FormControlLabel
+                    onChange={() => firstFormHandleChangePro(setFieldValue)}
+                    control={<Checkbox />}
+                    labelPlacement="start"
+                    label="Un professionel"
+                    value={values.pro}
+                    name="pro"
+                  />
+
+                  <InputLabel style={{ marginTop: 10 }}>Nom :</InputLabel>
+                  <TextField
+                    style={{ marginTop: 10 }}
+                    fullWidth
+                    name="Prénom"
+                    variant="outlined"
+                    value={values.firstname}
+                    onChange={(e) => {
+                      setFieldValue("firstname", e.target.value);
+                    }}
+                  />
+                  <InputLabel style={{ marginTop: 10 }}>Prénom :</InputLabel>
+                  <TextField
+                    style={{ marginTop: 10 }}
+                    fullWidth
+                    name="Nom"
+                    variant="outlined"
+                    onChange={(e) => {
+                      setFieldValue("lastname", e.target.value);
+                    }}
+                  />
+
+                  <InputLabel style={{ marginTop: 10 }}>Email :</InputLabel>
+                  <TextField
+                    style={{ marginTop: 10 }}
+                    fullWidth
+                    name="email"
+                    variant="outlined"
+                    onChange={(e) => {
+                      setFieldValue("email", e.target.value);
+                    }}
+                  />
+
+                  <InputLabel style={{ marginTop: 10 }}>
+                    Type d’événement :
+                  </InputLabel>
+                  <Select
+                    style={{ marginTop: 10 }}
+                    fullWidth
+                    label="Nombres de personnes :"
+                    value={eventType}
+                    onChange={(event) =>
+                      handleChangeEventType(event, setFieldValue)
+                    }
+                    name="eventType"
+                  >
+                    <MenuItem value={"Dejeuner"}>Dejeuner</MenuItem>
+                    <MenuItem value={"Autres"}>Autres</MenuItem>
+                  </Select>
+
+                  <InputLabel style={{ marginTop: 10 }}>
+                    Si autre précisez :
+                  </InputLabel>
+                  <TextField
+                    style={{ marginTop: 10 }}
+                    multiline
+                    rows={6}
+                    maxRows={10}
+                    fullWidth
+                    name="additional"
+                    onChange={(event) =>
+                      firstFormHandleChangeAdditionalText(event, setFieldValue)
+                    }
+                  />
+
+                  <InputLabel style={{ marginTop: 10 }}>
+                    Nombre de personne :
+                  </InputLabel>
+                  <Select
+                    style={{ marginTop: 10 }}
+                    fullWidth
+                    label="Nombres de personnes :"
+                    value={numb}
+                    onChange={(event) =>
+                      handleChangeNumber(event, setFieldValue)
+                    }
+                    name="numberOfPerson"
+                  >
+                    <MenuItem value="Moin de 50">0 - 50</MenuItem>
+                    <MenuItem value="Entre 50 et 100">50 - 100</MenuItem>
+                    <MenuItem value="Entre 100 et 200">100 - 200</MenuItem>
+                  </Select>
+                  <Grid
+                    item
+                    xs={12}
+                    alignItems={"center"}
+                    display="flex"
+                    justifyContent="center"
+                  >
+                    <Button variant="contained" type="submit">
+                      Contained
+                    </Button>
+                  </Grid>
+                </form>
+              )}
+            </Formik>
+          </Grid>
+          <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
+            <Formik
+              initialValues={{ email: "", password: "" }}
+              onSubmit={(values, { setSubmitting }) => {}}
+            >
+              {({
+                values,
+                errors,
+                touched,
+                handleChange,
+                handleBlur,
+                handleSubmit,
+                isSubmitting,
+                /* and other goodies */
+              }) => (
+                <form onSubmit={handleSubmit}>
+                  <h1>Contactez-nous</h1>
+                  <InputLabel>Vous êtes :</InputLabel>
+                  <FormControlLabel
+                    onChange={(event) => handleChangePart(event)}
+                    control={<Checkbox />}
+                    labelPlacement="start"
+                    label="Un particulier"
+                  />
+                  <FormControlLabel
+                    onChange={(event) => handleChangePart(event)}
+                    control={<Checkbox />}
+                    labelPlacement="start"
+                    label="Un professionel"
+                  />
+                  <InputLabel>Nombres de personnes :</InputLabel>
+                  <Select
+                    fullWidth
+                    label="Nombres de personnes :"
+                    value={numb}
+                    onChange={(event) => handleChangeNumber(event)}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={50}>0-50</MenuItem>
+                    <MenuItem value={100}>50-100</MenuItem>
+                    <MenuItem value={200}>100-200</MenuItem>
+                  </Select>
+                </form>
+              )}
+            </Formik>
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+      <Footer />
+    </>
   );
 }
 
