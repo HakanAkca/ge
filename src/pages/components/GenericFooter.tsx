@@ -6,7 +6,7 @@ import {
   Column,
   FooterLink,
   Heading,
-} from "./StyledFooter";
+} from "../../utils/StyledFooter";
 
 import logo from "../../images/logo.png";
 
