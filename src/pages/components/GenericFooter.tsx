@@ -10,7 +10,7 @@ import {
 
 import logo from "../../images/logo.png";
 
-const Footer = () => {
+export default function Footer() {
   return (
     <Box>
       <Container>
@@ -55,5 +55,4 @@ const Footer = () => {
       </Container>
     </Box>
   );
-};
-export default Footer;
+}

@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import GenericText from "../components/GenericText";
 import { style } from "typestyle";
@@ -230,7 +230,30 @@ export default function Details() {
             </Grid>
           </Grid>
         </div>
-        <Grid item xs={12}></Grid>
+        <Grid
+          alignItems={"center"}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          style={{ height: 250 }}
+          item
+          xs={12}
+        >
+          <h2>SI VOUS ÊTES INTÉRESSEZ</h2>
+          <Button
+            style={{
+              backgroundColor: "#D99D55",
+              color: "#FFFFFF",
+              borderRadius: 0,
+              width: 340,
+              height: 50,
+            }}
+            variant="outlined"
+            href="/contact"
+          >
+            Contactez-nous
+          </Button>
+        </Grid>
       </Grid>
       <Footer />
     </>
@@ -239,6 +262,8 @@ export default function Details() {
 
 const titleStyle = style({
   color: "#D99D55",
+  fontFamily: "Cookie",
+  fontSize: 48,
 });
 
 const textStyle = style({

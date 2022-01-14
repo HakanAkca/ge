@@ -113,6 +113,7 @@ const IndexPage = () => {
                 height: 50,
               }}
               variant="outlined"
+              href="/details"
             >
               DÉCOUVEZ NOS CAVIARDS
             </Button>

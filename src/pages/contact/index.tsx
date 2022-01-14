@@ -140,17 +140,39 @@ export default function Contact() {
     }
   };
 
+  const handleSubmitSecondForm = (values) => {
+    try {
+      emailjs
+        .send(
+          "service_cf2mg4i",
+          "template_k98vzsi",
+          values,
+          "user_SbJL0vKhTMtQhu8xgBtOi"
+        )
+        .then(
+          (result) => {
+            console.log(result.text);
+          },
+          (error) => {
+            console.log(error.text);
+          }
+        );
+    } catch {
+      console.log("toto");
+    }
+  };
+
   return (
     <>
       <Grid container>
         <NavBar />
-        <Grid item xs={12}>
+        {/* <Grid item xs={12}>
           <motion.img
             ref={ref}
             src={detailsHeaderImage}
             style={{ width: "100%", opacity }}
           />
-        </Grid>
+        </Grid> */}
         <Grid
           className={marginGridStyle}
           container
@@ -185,7 +207,9 @@ export default function Contact() {
                 /* and other goodies */
               }) => (
                 <form onSubmit={handleSubmit}>
-                  <h1>Demander un devis</h1>
+                  <h1 style={{ fontFamily: "Cookie", color: "#D99D55" }}>
+                    Demander un devis
+                  </h1>
                   <InputLabel>Vous êtes :</InputLabel>
                   <FormControlLabel
                     onChange={() => firstFormHandleChangePart(setFieldValue)}
@@ -293,8 +317,16 @@ export default function Contact() {
                     display="flex"
                     justifyContent="center"
                   >
-                    <Button variant="contained" type="submit">
-                      Contained
+                    <Button
+                      style={{
+                        width: 200,
+                        backgroundColor: "#D99D55",
+                        marginTop: 30,
+                      }}
+                      variant="contained"
+                      type="submit"
+                    >
+                      ENVOYEZ
                     </Button>
                   </Grid>
                 </form>
@@ -303,8 +335,10 @@ export default function Contact() {
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
             <Formik
-              initialValues={{ email: "", password: "" }}
-              onSubmit={(values, { setSubmitting }) => {}}
+              initialValues={{ name: "", number: "", email: "", message: "" }}
+              onSubmit={(values) => {
+                handleSubmitSecondForm(values);
+              }}
             >
               {({
                 values,
@@ -313,38 +347,80 @@ export default function Contact() {
                 handleChange,
                 handleBlur,
                 handleSubmit,
+                setFieldValue,
                 isSubmitting,
                 /* and other goodies */
               }) => (
                 <form onSubmit={handleSubmit}>
-                  <h1>Contactez-nous</h1>
-                  <InputLabel>Vous êtes :</InputLabel>
-                  <FormControlLabel
-                    onChange={(event) => handleChangePart(event)}
-                    control={<Checkbox />}
-                    labelPlacement="start"
-                    label="Un particulier"
-                  />
-                  <FormControlLabel
-                    onChange={(event) => handleChangePart(event)}
-                    control={<Checkbox />}
-                    labelPlacement="start"
-                    label="Un professionel"
-                  />
-                  <InputLabel>Nombres de personnes :</InputLabel>
-                  <Select
+                  <h1 style={{ fontFamily: "Cookie", color: "#D99D55" }}>
+                    Contactez-nous
+                  </h1>
+                  <GenericText className={genericTextStyle}>
+                    Contactez-nous via le formulaire de contact, pour toute
+                    demande de renseignements
+                  </GenericText>
+                  <TextField
+                    placeholder="Nom"
+                    style={{ marginTop: 10 }}
                     fullWidth
-                    label="Nombres de personnes :"
-                    value={numb}
-                    onChange={(event) => handleChangeNumber(event)}
+                    name="name"
+                    variant="outlined"
+                    onChange={(e) => {
+                      setFieldValue("name", e.target.value);
+                    }}
+                  />
+                  <TextField
+                    placeholder="Numéro de téléphone"
+                    style={{ marginTop: 10 }}
+                    fullWidth
+                    name="number"
+                    variant="outlined"
+                    onChange={(e) => {
+                      setFieldValue("number", e.target.value);
+                    }}
+                  />
+
+                  <TextField
+                    placeholder="Email"
+                    style={{ marginTop: 10 }}
+                    fullWidth
+                    name="email"
+                    variant="outlined"
+                    onChange={(e) => {
+                      setFieldValue("email", e.target.value);
+                    }}
+                  />
+
+                  <TextField
+                    style={{ marginTop: 10 }}
+                    multiline
+                    rows={6}
+                    maxRows={10}
+                    fullWidth
+                    name="message"
+                    onChange={(e) => {
+                      setFieldValue("message", e.target.value);
+                    }}
+                  />
+                  <Grid
+                    item
+                    xs={12}
+                    alignItems={"center"}
+                    display="flex"
+                    justifyContent="center"
                   >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={50}>0-50</MenuItem>
-                    <MenuItem value={100}>50-100</MenuItem>
-                    <MenuItem value={200}>100-200</MenuItem>
-                  </Select>
+                    <Button
+                      style={{
+                        width: 200,
+                        backgroundColor: "#D99D55",
+                        marginTop: 30,
+                      }}
+                      variant="contained"
+                      type="submit"
+                    >
+                      ENVOYEZ
+                    </Button>
+                  </Grid>
                 </form>
               )}
             </Formik>
@@ -358,4 +434,10 @@ export default function Contact() {
 
 const marginGridStyle = style({
   margin: 25,
+});
+
+const genericTextStyle = style({
+  fontSize: "18px",
+  fontFamily: "Roboto",
+  color: "black",
 });

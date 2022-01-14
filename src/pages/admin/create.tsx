@@ -11,10 +11,21 @@ import {
   TextareaAutosize,
 } from "@mui/material";
 import { Formik } from "formik";
+import { getDatabase, ref, set } from "firebase/database";
 
 const Create = () => {
-  const [value, setValue] = React.useState(new Date("2014-08-18T21:11:54"));
+  const [value, setValue] = React.useState(new Date());
 
+  const db = getDatabase();
+  console.log("db", db);
+
+  const onSubmit = (values) => {
+    console.log(values);
+    set(ref(db, "posts"), {
+      title: values.title,
+      date: value,
+    });
+  };
   return (
     <Container component="main">
       <CssBaseline />
@@ -28,7 +39,9 @@ const Create = () => {
       >
         <Formik
           initialValues={{ email: "", password: "" }}
-          onSubmit={(values, { setSubmitting }) => {}}
+          onSubmit={(values) => {
+            onSubmit(values);
+          }}
         >
           {({
             values,
@@ -85,7 +98,6 @@ const Create = () => {
                 onChange={(x) => console.log(x)}
               /> */}
               <Button
-                disabled={isSubmitting}
                 type="submit"
                 fullWidth
                 variant="contained"
