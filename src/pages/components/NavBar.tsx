@@ -23,7 +23,7 @@ const rc_nav_a = style({
   zIndex: 9,
   $nest: {
     "&:hover": {
-      color: "red",
+      color: "#D99D55",
     },
   },
 });
@@ -40,7 +40,7 @@ export default function Navbar() {
         <img src={logo} />
       </Grid>
       <Grid item xs={12}>
-        <Link activeClassName={activeClassStyle} to="/">
+        <Link activeClassName={activeClassStyle} to="/" className={rc_nav_a}>
           Accueil
         </Link>
         <Link
