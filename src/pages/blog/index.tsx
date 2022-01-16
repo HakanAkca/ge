@@ -9,13 +9,12 @@ import {
   useViewportScroll,
 } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import classnames from "classnames";
+import { doc, getDoc } from "firebase/firestore";
 
-import detailsHeaderImage from "../../../assets/detailsHeaderImage.svg";
 import NavBar from "../components/NavBar";
 import GenericCard from "../components/GenericCard";
 import { style } from "typestyle";
-
+import detailsHeaderImage from "../../../assets/detailsHeaderImage.svg";
 interface Props {
   children: React.ReactNode;
 }
@@ -82,42 +81,58 @@ export default function Details() {
   const yRange = useTransform(scrollY, [imageHeight - offsetHeight, 0], [0, 1]);
   const opacity = useSpring(yRange, { stiffness: 400, damping: 40 });
 
+  // const docRef = doc(db, "cities", "SF");
+  // const docSnap = await getDoc(docRef);
+
+  // if (docSnap.exists()) {
+  //   console.log("Document data:", docSnap.data());
+  // } else {
+  //   // doc.data() will be undefined in this case
+  //   console.log("No such document!");
+  // }
+
   return (
-    <Grid container>
-      <NavBar />
-      <Grid item xs={12}>
-        <motion.img
-          ref={ref}
-          src={detailsHeaderImage}
-          style={{ width: "100%", opacity }}
-        />
-      </Grid>
-      <Box className={boxStyle} sx={{ flexGrow: 1 }}>
-        <h1>Nos derniers évenements</h1>
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
-        >
-          {[...Array(6)].map((_, index) => (
+    <div style={{ backgroundColor: "#B3B3B3" }}>
+      <div
+        style={{ marginLeft: 90, marginRight: 90, backgroundColor: "#FFFFFF" }}
+      >
+        <Grid container>
+          <NavBar />
+          <Grid item xs={12}>
+            <motion.img
+              ref={ref}
+              src={detailsHeaderImage}
+              style={{ width: "100%", opacity }}
+            />
+          </Grid>
+          <Box className={boxStyle} sx={{ flexGrow: 1 }}>
+            <h1 style={{ fontFamily: "Cookie" }}>Nos derniers évenements</h1>
             <Grid
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              item
-              xs={12}
-              sm={6}
-              md={4}
-              lg={4}
-              xl={2}
-              key={index}
+              container
+              spacing={{ xs: 2, md: 3 }}
+              columns={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
             >
-              <GenericCard />
+              {Array.from(Array(6)).map((_, index) => (
+                <Grid
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                  item
+                  xs={12}
+                  sm={6}
+                  md={4}
+                  lg={4}
+                  xl={2}
+                  key={index}
+                >
+                  <GenericCard />
+                </Grid>
+              ))}
             </Grid>
-          ))}
+          </Box>
         </Grid>
-      </Box>
-    </Grid>
+      </div>
+    </div>
   );
 }
 

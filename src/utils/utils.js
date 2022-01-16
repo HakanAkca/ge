@@ -1,20 +1,23 @@
 import { initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore"
+import { getDatabase } from "firebase/database";
 
 const config = {
-  apiKey: "AIzaSyASlAHOLbA1XkhdPpj3X9b1JJuqeT519_0",
-  authDomain: "caviar-1ba18.firebaseapp.com",
-  projectId: "caviar-1ba18",
-  storageBucket: "caviar-1ba18.appspot.com",
-  messagingSenderId: "337025320058",
-  appId: "1:337025320058:web:270c8d3f392cba949027c3",
-  measurementId: "G-3FBM6G7FQ7"
+  apiKey: "AIzaSyC4J-OgS5PjNvSK-bQvmHwvMdBcaBIgIPo",
+  authDomain: "gecaviar.firebaseapp.com",
+  projectId: "gecaviar",
+  storageBucket: "gecaviar.appspot.com",
+  messagingSenderId: "637279564186",
+  appId: "1:637279564186:web:5759630f05d5d314c8ca23",
+  measurementId: "G-T03V1V5L8L",
+  databaseUrl: "https://gecaviar-default-rtdb.firebaseio.com/"
 }
 
 const app = initializeApp(config)
 
 const firebaseAuth = getAuth(app)
 const firestore = getFirestore(app)
+const getdatabase = getDatabase(app)
 
-export { firebaseAuth, firestore }
+export { firebaseAuth, firestore, getdatabase }

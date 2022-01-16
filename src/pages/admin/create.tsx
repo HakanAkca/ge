@@ -11,19 +11,20 @@ import {
   TextareaAutosize,
 } from "@mui/material";
 import { Formik } from "formik";
-import { getDatabase, ref, set } from "firebase/database";
+import { firestore } from "../../utils/utils";
+import { collection, addDoc } from "firebase/firestore";
+
+// Add a new document with a generated id.
 
 const Create = () => {
-  const [value, setValue] = React.useState(new Date());
+  const [date, setDate] = React.useState(new Date());
 
-  const db = getDatabase();
-  console.log("db", db);
-
-  const onSubmit = (values) => {
-    console.log(values);
-    set(ref(db, "posts"), {
+  const onSubmit = async (values) => {
+    const db = firestore;
+    const docRef = await addDoc(collection(db, "posts"), {
       title: values.title,
-      date: value,
+      description: values.description,
+      date: values.date,
     });
   };
   return (
@@ -38,7 +39,7 @@ const Create = () => {
         }}
       >
         <Formik
-          initialValues={{ email: "", password: "" }}
+          initialValues={{ title: "", description: "", date: "" }}
           onSubmit={(values) => {
             onSubmit(values);
           }}
@@ -87,8 +88,8 @@ const Create = () => {
                   <DesktopDatePicker
                     label="Date desktop"
                     inputFormat="MM/dd/yyyy"
-                    value={value}
-                    onChange={(e) => console.log(e)}
+                    value={values.date}
+                    onChange={(e) => setFieldValue("date", e)}
                     renderInput={(params) => <TextField {...params} />}
                   />
                 </Grid>
