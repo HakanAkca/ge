@@ -1,0 +1,116 @@
+footer {
+  display: flex;
+  flex-direction: column;
+  background-color: #0F0F20;
+  padding: 16px;
+}
+
+@media screen and (min-width: 1024px) {
+  footer {
+    padding: 16px 48px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  footer form {
+    max-width: 500px;
+  }
+}
+
+footer .links img {
+  height: 80px;
+}
+
+footer .links ul {
+  display: flex;
+  flex-direction: column;
+}
+
+footer .links a {
+  color: #D99D55;
+  display: inline-block;
+  text-decoration: none;
+  margin: 4px 0;
+}
+
+footer form {
+  color: #fff;
+  padding: 0 48px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+form .input-row {
+  display: flex;
+  flex-direction: column;
+}
+
+form .input-row input {
+  height: 32px;
+}
+
+form .input-row input,
+form .input-row textarea {
+  margin-bottom: 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  padding: 0 8px;
+  border: solid 1px #333;
+  flex-grow: 1;
+  font-family: Roboto;
+}
+
+form .input-row textarea {
+  padding: 8px;
+}
+
+form .input-row input::placeholder,
+form .input-row textarea::placeholder {
+  color: #D99D55;
+  font-weight: 300;
+}
+
+form .input-row input:focus,
+form .input-row textarea:focus {
+  outline: none;
+}
+
+@media screen and (min-width: 768px) {
+  form .input-row {
+    flex-direction: row;
+  }
+
+  form .input-row input:not(:first-child) {
+    margin-left: 16px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+}
+
+button[type=submit] {
+  display: inline;
+  margin: auto;
+  height: 40px;
+  padding: 0 48px;
+  background-color: #D99D55;
+  color: #fff;
+  border-radius: 2px;
+  border: none;
+  text-transform: uppercase;
+}
+
+footer .contact img {
+  height: 20px;
+  margin-right: 8px;
+}
+
+footer .contact p {
+  display: flex;
+  align-items: center;
+}
+
+footer .contact a {
+  color: #fff;
+}

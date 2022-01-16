@@ -99,7 +99,7 @@ export default function Details() {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
         >
-          {Array.from(Array(6)).map((_, index) => (
+          {[...Array(6)].map((_, index) => (
             <Grid
               display="flex"
               justifyContent="center"
