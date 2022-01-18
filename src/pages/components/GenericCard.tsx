@@ -33,7 +33,8 @@ const GenericCard = ({
       <CardActionArea onClick={() => onPress()}>
         <CardMedia
           component="img"
-          height="307px"
+          width="370px"
+          height="302px"
           alt="green iguana"
           src={data && data.coverUrl}
           className="imageStyle"
@@ -56,7 +57,7 @@ const cardStyle = style({
       display: "block !important",
     },
     "&:hover .imageStyle": {
-      opacity: 0.44,
+      opacity: 0.14,
     },
   },
 });
@@ -64,11 +65,15 @@ const cardStyle = style({
 const overlayContainerStyle = style({
   display: "none",
   position: "absolute",
-  top: "50%",
+  top: "40%",
   left: "auto",
   right: "auto",
   width: "100%",
   textAlign: "center",
+  color: "#D99D55",
+  fontSize: 48,
+  fontFamily: "Cookie",
+  overflowWrap: "break-word",
 });
 
 export default GenericCard;

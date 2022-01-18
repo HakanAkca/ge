@@ -122,7 +122,7 @@ export default function Details() {
               style={{
                 fontFamily: "Cookie",
                 color: "#D99D55",
-                marginBottom: "5%",
+                marginBottom: "3.5%",
               }}
             >
               Nos derniers évenements
@@ -148,7 +148,7 @@ export default function Details() {
                     xs={12}
                     sm={12}
                     md={6}
-                    lg={6}
+                    lg={4}
                     xl={3}
                     key={index}
                   >

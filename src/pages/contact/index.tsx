@@ -20,12 +20,12 @@ import {
   useViewportScroll,
 } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import toast, { Toaster } from "react-hot-toast";
+import { Formik } from "formik";
+import emailjs from "emailjs-com";
 
 import NavBar from "../components/NavBar";
-import detailsHeaderImage from "../../../assets/detailsHeaderImage.svg";
-import { Formik } from "formik";
 import Footer from "../components/GenericFooter";
-import emailjs from "emailjs-com";
 
 interface Props {
   children: React.ReactNode;
@@ -122,14 +122,17 @@ export default function Contact() {
     try {
       emailjs
         .send(
-          "service_cf2mg4i",
-          "template_c4kgqb5",
+          "service_1n3w5wr",
+          "template_g55zlwh",
           values,
-          "user_SbJL0vKhTMtQhu8xgBtOi"
+          "user_N3e4bBvSd9Z6FbHzwk5SW"
         )
         .then(
           (result) => {
             console.log(result.text);
+            toast.success("Votre demande à bien été transmise", {
+              position: "bottom-right",
+            });
           },
           (error) => {
             console.log(error.text);
@@ -433,6 +436,7 @@ export default function Contact() {
           </Grid>
         </Grid>
       </Grid>
+      <Toaster />
       <Footer />
     </>
   );
@@ -446,5 +450,5 @@ const genericTextStyle = style({
   fontSize: "18px",
   fontFamily: "Roboto",
   color: "black",
-  fontWeight: "400",
+  fontWeight: 400,
 });

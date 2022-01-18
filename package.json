@@ -41,6 +41,7 @@
     "react-dom": "^17.0.1",
     "react-google-recaptcha": "^2.1.0",
     "react-helmet": "^6.1.0",
+    "react-hot-toast": "^2.2.0",
     "react-intersection-observer": "^8.32.3",
     "react-multi-carousel": "^2.6.5",
     "react-router-dom": "5.2.0",
