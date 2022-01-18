@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DesktopDatePicker, LocalizationProvider } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import {
@@ -9,35 +9,60 @@ import {
   CssBaseline,
   Grid,
   TextareaAutosize,
+  InputLabel,
 } from "@mui/material";
 import { Formik } from "formik";
 import { firestore } from "../../utils/utils";
 import { collection, addDoc } from "firebase/firestore";
+import {
+  getStorage,
+  ref,
+  getDownloadURL,
+  uploadString,
+  uploadBytesResumable,
+} from "firebase/storage";
 
 // Add a new document with a generated id.
 
 const Create = () => {
-  const [date, setDate] = React.useState(new Date());
+  const [image, setImage] = useState(null);
+  const [url, setUrl] = useState("");
+  const [progress, setProgress] = useState(0);
 
   const onSubmit = async (values) => {
     const db = firestore;
-    const docRef = await addDoc(collection(db, "posts"), {
+    await addDoc(collection(db, "posts"), {
       title: values.title,
       description: values.description,
       date: values.date,
+      coverUrl: url,
     });
   };
+
+  const handleChangeImage = (e) => {
+    if (e) {
+      setImage(e);
+      const storage = getStorage();
+      const storageRef = ref(storage, `images/${e.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, e);
+
+      uploadTask.on("state_changed", (snapshot: any) => {
+        getDownloadURL(snapshot.ref).then((URL) => {
+          setUrl(URL);
+        });
+      });
+    }
+  };
+
   return (
-    <Container component="main">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+    <Grid
+      display="flex"
+      alignItems={"center"}
+      justifyContent={"center"}
+      container
+      style={{ padding: 50 }}
+    >
+      <Grid item xs={12}>
         <Formik
           initialValues={{ title: "", description: "", date: "" }}
           onSubmit={(values) => {
@@ -60,17 +85,31 @@ const Create = () => {
                 handleSubmit();
               }}
             >
-              <TextField
-                onChange={(e) => setFieldValue("title", e.target.value)}
-                required
-                fullWidth
-                id="title"
-                label="Titre"
-                name="title"
-                autoComplete="Titre"
-                margin="dense"
-                autoFocus
-              />
+              <Grid display={"flex"} alignItems={"center"} item>
+                <Grid xs={3}>
+                  <TextField
+                    onChange={(e) => setFieldValue("title", e.target.value)}
+                    required
+                    id="title"
+                    label="Titre"
+                    name="title"
+                    autoComplete="Titre"
+                    margin="dense"
+                    autoFocus
+                  />
+                </Grid>
+                <Grid xs={3}>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DesktopDatePicker
+                      label="Date de l'évenement"
+                      inputFormat="dd/MM/yyyy"
+                      value={values.date}
+                      onChange={(e) => setFieldValue("date", e)}
+                      renderInput={(params) => <TextField {...params} />}
+                    />
+                  </LocalizationProvider>
+                </Grid>
+              </Grid>
               <TextareaAutosize
                 onChange={(e) => setFieldValue("description", e.target.value)}
                 required
@@ -81,23 +120,20 @@ const Create = () => {
                 placeholder="Maximum 4 rows"
                 defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
                     ut labore et dolore magna aliqua."
-                style={{ width: 1400, height: 400 }}
+                style={{ width: "100%", height: 200 }}
               />
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <Grid item style={{ marginTop: 10 }}>
-                  <DesktopDatePicker
-                    label="Date desktop"
-                    inputFormat="MM/dd/yyyy"
-                    value={values.date}
-                    onChange={(e) => setFieldValue("date", e)}
-                    renderInput={(params) => <TextField {...params} />}
-                  />
-                </Grid>
-              </LocalizationProvider>
-              {/* <ReCAPTCHA
-                sitekey="6LcClcUdAAAAAOIYwebziz28PI3L7lqoro8ZpPwk"
-                onChange={(x) => console.log(x)}
-              /> */}
+
+              <Grid item>
+                <InputLabel style={{ marginTop: 50 }}>
+                  Photo de couverture
+                </InputLabel>
+                {url && <img src={url} style={{ height: 300, width: 300 }} />}
+                <input
+                  type="file"
+                  onChange={(e) => handleChangeImage(e.target.files[0])}
+                />
+              </Grid>
+
               <Button
                 type="submit"
                 fullWidth
@@ -109,8 +145,8 @@ const Create = () => {
             </form>
           )}
         </Formik>
-      </Box>
-    </Container>
+      </Grid>
+    </Grid>
   );
 };
 

@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { Box, CardActionArea, Modal } from "@mui/material";
 
 import cover from "../../images/cover.png";
 import detailsHeaderImage from "../../../assets/detailsHeaderImage.svg";
@@ -14,21 +14,32 @@ import { makeStyles } from "@material-ui/core/styles";
 export interface GenericCardProps {
   cover?: any;
   images?: any;
+  data?: any;
+  handleOpen?: any;
+  setSelectedData?: any;
 }
 
-const GenericCard = ({ cover, images }: GenericCardProps) => {
+const GenericCard = ({
+  data,
+  handleOpen,
+  setSelectedData,
+}: GenericCardProps) => {
+  const onPress = () => {
+    handleOpen();
+    setSelectedData(data);
+  };
   return (
     <Card className={cardStyle}>
-      <CardActionArea href="https://google.com">
+      <CardActionArea onClick={() => onPress()}>
         <CardMedia
           component="img"
-          height="308px"
+          height="307px"
           alt="green iguana"
-          src={detailsHeaderImage}
+          src={data && data.coverUrl}
           className="imageStyle"
         />
         <div className={classnames(overlayContainerStyle, "hover-text-style")}>
-          this text should overlay the image
+          {data && data.title}
         </div>
       </CardActionArea>
     </Card>
@@ -38,6 +49,8 @@ const GenericCard = ({ cover, images }: GenericCardProps) => {
 const cardStyle = style({
   position: "relative",
   border: "none",
+  width: "max-content",
+  borderRadius: 1,
   $nest: {
     "&:hover .hover-text-style": {
       display: "block !important",

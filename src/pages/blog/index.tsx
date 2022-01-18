@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from "react";
-import { Box, Grid, styled } from "@mui/material";
+import React, { FC, useEffect, useState } from "react";
+import { Box, Grid, Modal, styled, Typography } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import {
   motion,
@@ -8,13 +8,14 @@ import {
   useTransform,
   useViewportScroll,
 } from "framer-motion";
+import { style } from "typestyle";
 import { useInView } from "react-intersection-observer";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 import NavBar from "../components/NavBar";
 import GenericCard from "../components/GenericCard";
-import { style } from "typestyle";
 import detailsHeaderImage from "../../../assets/detailsHeaderImage.svg";
+import { firestore } from "../../utils/utils";
 interface Props {
   children: React.ReactNode;
 }
@@ -55,7 +56,13 @@ export default function Details() {
   const [lastYPos, setLastYPos] = React.useState(0);
   const [shouldShowActions, setShouldShowActions] = React.useState(false);
   const [imageHeight, getImageHeight] = React.useState<number>(0);
+  const [data, setData] = useState(null);
+  const [open, setOpen] = React.useState(false);
+  const [selectedData, setSelectedData] = React.useState(null);
+
   const ref = React.useRef<HTMLImageElement>(null);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   React.useEffect(() => {
     function handleScroll() {
@@ -76,21 +83,26 @@ export default function Details() {
     };
   }, [lastYPos]);
 
+  React.useEffect(async () => {
+    let data = [];
+    const db = firestore;
+    const querySnapshot = await getDocs(collection(db, "posts"));
+    querySnapshot.forEach((doc: any) => {
+      data.push({
+        title: doc.data().title,
+        date: doc.data().date,
+        description: doc.data().description,
+        coverUrl: doc.data().coverUrl,
+      });
+    });
+    setData(data);
+  }, []);
+
   const offsetHeight = 50;
   const { scrollY } = useViewportScroll();
   const yRange = useTransform(scrollY, [imageHeight - offsetHeight, 0], [0, 1]);
   const opacity = useSpring(yRange, { stiffness: 400, damping: 40 });
-
-  // const docRef = doc(db, "cities", "SF");
-  // const docSnap = await getDoc(docRef);
-
-  // if (docSnap.exists()) {
-  //   console.log("Document data:", docSnap.data());
-  // } else {
-  //   // doc.data() will be undefined in this case
-  //   console.log("No such document!");
-  // }
-
+  console.log(selectedData);
   return (
     <div style={{ backgroundColor: "#B3B3B3" }}>
       <div
@@ -106,36 +118,82 @@ export default function Details() {
             />
           </Grid>
           <Box className={boxStyle} sx={{ flexGrow: 1 }}>
-            <h1 style={{ fontFamily: "Cookie" }}>Nos derniers évenements</h1>
+            <h1
+              style={{
+                fontFamily: "Cookie",
+                color: "#D99D55",
+                marginBottom: "5%",
+              }}
+            >
+              Nos derniers évenements
+            </h1>
             <Grid
               container
               spacing={{ xs: 2, md: 3 }}
               columns={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
             >
-              {Array.from(Array(6)).map((_, index) => (
-                <Grid
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                  item
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  lg={4}
-                  xl={2}
-                  key={index}
-                >
-                  <GenericCard />
-                </Grid>
-              ))}
+              {data &&
+                data.map((x, index) => (
+                  <Grid
+                    display="flex"
+                    justifyContent={{
+                      xs: "center",
+                      sm: "center",
+                      md: "center",
+                      lg: "center",
+                      xl: "flex-start",
+                    }}
+                    alignItems="center"
+                    item
+                    xs={12}
+                    sm={12}
+                    md={6}
+                    lg={6}
+                    xl={3}
+                    key={index}
+                  >
+                    <GenericCard
+                      data={x}
+                      handleOpen={handleOpen}
+                      setSelectedData={setSelectedData}
+                    />
+                  </Grid>
+                ))}
             </Grid>
           </Box>
         </Grid>
       </div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box className={modalStyle}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </Typography>
+        </Box>
+      </Modal>
     </div>
   );
 }
 
 const boxStyle = style({
   margin: 50,
+});
+
+const modalStyle = style({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
 });

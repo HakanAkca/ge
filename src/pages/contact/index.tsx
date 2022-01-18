@@ -65,7 +65,7 @@ export default function Contact() {
   const [numb, setNumber] = React.useState(50);
   const [part, setPart] = React.useState(false);
   const [pro, setPro] = React.useState(false);
-  const [eventType, setEventType] = React.useState("Dejeuner");
+  const [eventType, setEventType] = React.useState("Déjeuner");
   // const [pro, setPro] = React.useState(false);
 
   React.useEffect(() => {
@@ -274,7 +274,12 @@ export default function Contact() {
                     }
                     name="eventType"
                   >
-                    <MenuItem value={"Dejeuner"}>Dejeuner</MenuItem>
+                    <MenuItem value={"Déjeuner"}>Déjeuner</MenuItem>
+                    <MenuItem value={"Soirée"}>Soirée</MenuItem>
+                    <MenuItem value={"Dîner"}>Dîner</MenuItem>
+                    <MenuItem value={"Mariage"}>Mariage</MenuItem>
+                    <MenuItem value={"Anniversaire"}>Anniversaire</MenuItem>
+                    <MenuItem value={"Séminaire"}>Séminaire</MenuItem>
                     <MenuItem value={"Autres"}>Autres</MenuItem>
                   </Select>
 
@@ -308,7 +313,8 @@ export default function Contact() {
                   >
                     <MenuItem value="Moin de 50">0 - 50</MenuItem>
                     <MenuItem value="Entre 50 et 100">50 - 100</MenuItem>
-                    <MenuItem value="Entre 100 et 200">100 - 200</MenuItem>
+                    <MenuItem value="Entre 100 et 150">100 - 150</MenuItem>
+                    <MenuItem value="Plus de 150">+ 150</MenuItem>
                   </Select>
                   <Grid
                     item
@@ -440,4 +446,5 @@ const genericTextStyle = style({
   fontSize: "18px",
   fontFamily: "Roboto",
   color: "black",
+  fontWeight: "400",
 });
