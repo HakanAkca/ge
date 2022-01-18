@@ -47,7 +47,8 @@
     "react-router-dom": "5.2.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.3",
-    "typestyle": "^2.2.0"
+    "typestyle": "^2.2.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@types/react-google-recaptcha": "^2.1.2",

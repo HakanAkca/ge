@@ -9,7 +9,6 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import Divider from "@mui/material/Divider";
 import GenericText from "../components/GenericText";
 import { style } from "typestyle";
 import {
@@ -21,11 +20,23 @@ import {
 } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import toast, { Toaster } from "react-hot-toast";
-import { Formik } from "formik";
+import { Field, Formik, Form } from "formik";
 import emailjs from "emailjs-com";
 
 import NavBar from "../components/NavBar";
 import Footer from "../components/GenericFooter";
+import { LoadingButton } from "@mui/lab";
+import * as Yup from "yup";
+
+const SignupSchema = Yup.object().shape({
+  firstname: Yup.string().required("Merci de saisir un Prénom"),
+  lastname: Yup.string().required("Merci de saisir un Nom"),
+  email: Yup.string().email("Email invalide").required("Email requis"),
+  eventType: Yup.string().required("Merci de choisir un type d'évenement"),
+  numberOfPerson: Yup.string().required(
+    "Merci de choisir le nombre de personnes"
+  ),
+});
 
 interface Props {
   children: React.ReactNode;
@@ -62,10 +73,8 @@ export default function Contact() {
   const [shouldShowActions, setShouldShowActions] = React.useState(false);
   const [imageHeight, getImageHeight] = React.useState<number>(0);
   const ref = React.useRef<HTMLImageElement>(null);
-  const [numb, setNumber] = React.useState(50);
   const [part, setPart] = React.useState(false);
   const [pro, setPro] = React.useState(false);
-  const [eventType, setEventType] = React.useState("Déjeuner");
   // const [pro, setPro] = React.useState(false);
 
   React.useEffect(() => {
@@ -92,11 +101,6 @@ export default function Contact() {
   const yRange = useTransform(scrollY, [imageHeight - offsetHeight, 0], [0, 1]);
   const opacity = useSpring(yRange, { stiffness: 400, damping: 40 });
 
-  const handleChangeNumber = (event, setFieldValue) => {
-    setNumber(event.target.value);
-    setFieldValue("numberOfPerson", event.target.value);
-  };
-
   const firstFormHandleChangePart = (setFieldValue) => {
     setPart(!part);
     setFieldValue("pro", true);
@@ -109,16 +113,8 @@ export default function Contact() {
     setFieldValue("typePerson", "Professionel");
   };
 
-  const firstFormHandleChangeAdditionalText = (event, setFieldValue) => {
-    setFieldValue("additional", event.target.value);
-  };
-
-  const handleChangeEventType = (event, setFieldValue) => {
-    setEventType(event.target.value);
-    setFieldValue("eventType", event.target.value);
-  };
-
-  const handleSubmit = (values) => {
+  const handleSubmitFirstForm = (values, setSubmitting) => {
+    setSubmitting(true);
     try {
       emailjs
         .send(
@@ -128,11 +124,11 @@ export default function Contact() {
           "user_N3e4bBvSd9Z6FbHzwk5SW"
         )
         .then(
-          (result) => {
-            console.log(result.text);
+          () => {
             toast.success("Votre demande à bien été transmise", {
               position: "bottom-right",
             });
+            setSubmitting(false);
           },
           (error) => {
             console.log(error.text);
@@ -189,157 +185,201 @@ export default function Contact() {
                 email: "",
                 part: false,
                 pro: false,
-                eventType: "dejeuner",
-                numberOfPerson: null,
+                eventType: "",
+                numberOfPerson: "",
                 additional: "",
                 typePerson: "",
               }}
-              onSubmit={(values) => {
-                handleSubmit(values);
-              }}
+              validationSchema={SignupSchema}
+              onSubmit={() => {}}
             >
               {({
                 values,
+                setFieldValue,
+                setSubmitting,
+                setFieldTouched,
+                isSubmitting,
                 errors,
                 touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                setFieldValue,
-                isSubmitting,
-                /* and other goodies */
-              }) => (
-                <form onSubmit={handleSubmit}>
-                  <h1 style={{ fontFamily: "Cookie", color: "#D99D55" }}>
-                    Demander un devis
-                  </h1>
-                  <InputLabel>Vous êtes :</InputLabel>
-                  <FormControlLabel
-                    onChange={() => firstFormHandleChangePart(setFieldValue)}
-                    control={<Checkbox />}
-                    labelPlacement="start"
-                    label="Un particulier"
-                    value={values.part}
-                    name="part"
-                  />
-                  <FormControlLabel
-                    onChange={() => firstFormHandleChangePro(setFieldValue)}
-                    control={<Checkbox />}
-                    labelPlacement="start"
-                    label="Un professionel"
-                    value={values.pro}
-                    name="pro"
-                  />
+                isValid,
+              }) => {
+                return (
+                  <Form>
+                    <h1 style={{ fontFamily: "Cookie", color: "#D99D55" }}>
+                      Demander un devis
+                    </h1>
+                    <InputLabel>Vous êtes :</InputLabel>
+                    <FormControlLabel
+                      onChange={() => firstFormHandleChangePart(setFieldValue)}
+                      control={<Checkbox />}
+                      labelPlacement="start"
+                      label="Un particulier"
+                      value={values.part}
+                      name="part"
+                    />
+                    <FormControlLabel
+                      onChange={() => firstFormHandleChangePro(setFieldValue)}
+                      control={<Checkbox />}
+                      labelPlacement="start"
+                      label="Un professionel"
+                      value={values.pro}
+                      name="pro"
+                    />
 
-                  <InputLabel style={{ marginTop: 10 }}>Nom :</InputLabel>
-                  <TextField
-                    style={{ marginTop: 10 }}
-                    fullWidth
-                    name="Prénom"
-                    variant="outlined"
-                    value={values.firstname}
-                    onChange={(e) => {
-                      setFieldValue("firstname", e.target.value);
-                    }}
-                  />
-                  <InputLabel style={{ marginTop: 10 }}>Prénom :</InputLabel>
-                  <TextField
-                    style={{ marginTop: 10 }}
-                    fullWidth
-                    name="Nom"
-                    variant="outlined"
-                    onChange={(e) => {
-                      setFieldValue("lastname", e.target.value);
-                    }}
-                  />
-
-                  <InputLabel style={{ marginTop: 10 }}>Email :</InputLabel>
-                  <TextField
-                    style={{ marginTop: 10 }}
-                    fullWidth
-                    name="email"
-                    variant="outlined"
-                    onChange={(e) => {
-                      setFieldValue("email", e.target.value);
-                    }}
-                  />
-
-                  <InputLabel style={{ marginTop: 10 }}>
-                    Type d’événement :
-                  </InputLabel>
-                  <Select
-                    style={{ marginTop: 10 }}
-                    fullWidth
-                    label="Nombres de personnes :"
-                    value={eventType}
-                    onChange={(event) =>
-                      handleChangeEventType(event, setFieldValue)
-                    }
-                    name="eventType"
-                  >
-                    <MenuItem value={"Déjeuner"}>Déjeuner</MenuItem>
-                    <MenuItem value={"Soirée"}>Soirée</MenuItem>
-                    <MenuItem value={"Dîner"}>Dîner</MenuItem>
-                    <MenuItem value={"Mariage"}>Mariage</MenuItem>
-                    <MenuItem value={"Anniversaire"}>Anniversaire</MenuItem>
-                    <MenuItem value={"Séminaire"}>Séminaire</MenuItem>
-                    <MenuItem value={"Autres"}>Autres</MenuItem>
-                  </Select>
-
-                  <InputLabel style={{ marginTop: 10 }}>
-                    Si autre précisez :
-                  </InputLabel>
-                  <TextField
-                    style={{ marginTop: 10 }}
-                    multiline
-                    rows={6}
-                    maxRows={10}
-                    fullWidth
-                    name="additional"
-                    onChange={(event) =>
-                      firstFormHandleChangeAdditionalText(event, setFieldValue)
-                    }
-                  />
-
-                  <InputLabel style={{ marginTop: 10 }}>
-                    Nombre de personne :
-                  </InputLabel>
-                  <Select
-                    style={{ marginTop: 10 }}
-                    fullWidth
-                    label="Nombres de personnes :"
-                    value={numb}
-                    onChange={(event) =>
-                      handleChangeNumber(event, setFieldValue)
-                    }
-                    name="numberOfPerson"
-                  >
-                    <MenuItem value="Moin de 50">0 - 50</MenuItem>
-                    <MenuItem value="Entre 50 et 100">50 - 100</MenuItem>
-                    <MenuItem value="Entre 100 et 150">100 - 150</MenuItem>
-                    <MenuItem value="Plus de 150">+ 150</MenuItem>
-                  </Select>
-                  <Grid
-                    item
-                    xs={12}
-                    alignItems={"center"}
-                    display="flex"
-                    justifyContent="center"
-                  >
-                    <Button
-                      style={{
-                        width: 200,
-                        backgroundColor: "#D99D55",
-                        marginTop: 30,
+                    <InputLabel style={{ marginTop: 10 }}>Prénom :</InputLabel>
+                    <Field
+                      name="firstname"
+                      component={TextField}
+                      required={true}
+                      style={{ marginTop: 10 }}
+                      fullWidth
+                      variant="outlined"
+                      value={values.firstname}
+                      onChange={(e) => {
+                        setFieldValue("firstname", e.target.value);
+                        setFieldTouched("firstname", true);
                       }}
-                      variant="contained"
-                      type="submit"
+                      onBlur={() => setFieldTouched("firstname", true)}
+                    />
+                    {errors.firstname && touched.firstname ? (
+                      <div>{errors.firstname}</div>
+                    ) : null}
+                    <InputLabel style={{ marginTop: 10 }}>Nom :</InputLabel>
+                    <Field
+                      name="lastname"
+                      component={TextField}
+                      required={true}
+                      style={{ marginTop: 10 }}
+                      fullWidth
+                      variant="outlined"
+                      onChange={(e) => {
+                        setFieldValue("lastname", e.target.value);
+                        setFieldTouched("lastname", true);
+                      }}
+                      onBlur={() => setFieldTouched("lastname", true)}
+                    />
+                    {errors.lastname && touched.lastname ? (
+                      <div>{errors.lastname}</div>
+                    ) : null}
+
+                    <InputLabel style={{ marginTop: 10 }}>Email :</InputLabel>
+                    <Field
+                      name="email"
+                      component={TextField}
+                      required={true}
+                      style={{ marginTop: 10 }}
+                      fullWidth
+                      variant="outlined"
+                      onChange={(e) => {
+                        setFieldValue("email", e.target.value);
+                        setFieldTouched("email", true);
+                      }}
+                      onBlur={() => setFieldTouched("email", true)}
+                    />
+                    {errors.email && touched.email ? (
+                      <div>{errors.email}</div>
+                    ) : null}
+
+                    <InputLabel style={{ marginTop: 10 }}>
+                      Type d’événement :
+                    </InputLabel>
+                    <Field
+                      component={Select}
+                      as="select"
+                      name="eventType"
+                      required={true}
+                      style={{ marginTop: 10 }}
+                      fullWidth
+                      label="Type d'évenement :"
+                      value={values.eventType}
+                      onChange={(e) => {
+                        setFieldValue("eventType", e.target.value);
+                        setFieldTouched("eventType", true);
+                      }}
+                      onBlur={() => setFieldTouched("eventType", true)}
                     >
-                      ENVOYEZ
-                    </Button>
-                  </Grid>
-                </form>
-              )}
+                      <MenuItem value={"Déjeuner"}>Déjeuner</MenuItem>
+                      <MenuItem value={"Soirée"}>Soirée</MenuItem>
+                      <MenuItem value={"Dîner"}>Dîner</MenuItem>
+                      <MenuItem value={"Mariage"}>Mariage</MenuItem>
+                      <MenuItem value={"Anniversaire"}>Anniversaire</MenuItem>
+                      <MenuItem value={"Séminaire"}>Séminaire</MenuItem>
+                      <MenuItem value={"Autres"}>Autres</MenuItem>
+                    </Field>
+                    {errors.eventType && touched.eventType ? (
+                      <div>{errors.eventType}</div>
+                    ) : null}
+
+                    <InputLabel style={{ marginTop: 10 }}>
+                      Si autre précisez :
+                    </InputLabel>
+                    <Field
+                      component={TextField}
+                      required={true}
+                      style={{ marginTop: 10 }}
+                      multiline
+                      rows={6}
+                      maxRows={10}
+                      fullWidth
+                      name="additional"
+                      onChange={(e) => {
+                        setFieldValue("additional", e.target.value);
+                      }}
+                    />
+
+                    <InputLabel style={{ marginTop: 10 }}>
+                      Nombre de personne :
+                    </InputLabel>
+                    <Field
+                      as="select"
+                      component={Select}
+                      style={{ marginTop: 10 }}
+                      fullWidth
+                      label="Nombres de personnes :"
+                      value={values.numberOfPerson}
+                      onChange={(e) => {
+                        setFieldValue("numberOfPerson", e.target.value);
+                        setFieldTouched("numberOfPerson", true);
+                      }}
+                      onBlur={() => setFieldTouched("numberOfPerson", true)}
+                      name="numberOfPerson"
+                    >
+                      <MenuItem value="Moins de 50">0 - 50</MenuItem>
+                      <MenuItem value="Entre 50 et 100">50 - 100</MenuItem>
+                      <MenuItem value="Entre 100 et 150">100 - 150</MenuItem>
+                      <MenuItem value="Plus de 150">+ 150</MenuItem>
+                    </Field>
+                    {errors.numberOfPerson && touched.numberOfPerson ? (
+                      <div>{errors.numberOfPerson}</div>
+                    ) : null}
+
+                    <Grid
+                      item
+                      xs={12}
+                      alignItems={"center"}
+                      display="flex"
+                      justifyContent="center"
+                    >
+                      <LoadingButton
+                        style={{
+                          width: 200,
+                          backgroundColor: "#D99D55",
+                          marginTop: 30,
+                        }}
+                        disabled={!isValid || isSubmitting}
+                        loading={isSubmitting}
+                        variant="contained"
+                        type="submit"
+                        onClick={() =>
+                          handleSubmitFirstForm(values, setSubmitting)
+                        }
+                      >
+                        ENVOYEZ
+                      </LoadingButton>
+                    </Grid>
+                  </Form>
+                );
+              }}
             </Formik>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
