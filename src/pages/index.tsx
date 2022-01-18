@@ -1,5 +1,5 @@
 import React from "react";
-import { style } from "typestyle";
+import { style, media } from "typestyle";
 import { Grid, Button } from "@mui/material";
 import classnames from "classnames";
 import GenericText from "./components/GenericText";
@@ -11,13 +11,12 @@ import gevy from "../images/gevy.png";
 import NavBar from "./components/NavBar";
 import InstagramImage from "./components/InstagramImage";
 import logo from "../images/logo.png";
+import { DeviceSmartphones } from "../utils/devices";
 
 const IndexPage = () => {
   return (
     <div style={{ backgroundColor: "#B3B3B3" }}>
-      <div
-        style={{ marginLeft: 90, marginRight: 90, backgroundColor: "#B3B3B3" }}
-      >
+      <div className={sideMarginStyle}>
         <NavBar />
         <Grid container style={{ overflow: "hidden" }}>
           <Grid item xs={12}>
@@ -169,6 +168,15 @@ const IndexPage = () => {
     </div>
   );
 };
+
+const sideMarginStyle = style(
+  {
+    marginLeft: 90,
+    marginRight: 90,
+    backgroundColor: "#B3B3B3",
+  },
+  media(DeviceSmartphones, { marginLeft: 0, marginRight: 0 })
+);
 
 const globalPaddingStyle = style({
   padding: 50,

@@ -8,7 +8,7 @@ import {
   useTransform,
   useViewportScroll,
 } from "framer-motion";
-import { style } from "typestyle";
+import { style, media } from "typestyle";
 import { useInView } from "react-intersection-observer";
 import { collection, getDocs } from "firebase/firestore";
 
@@ -16,6 +16,7 @@ import NavBar from "../components/NavBar";
 import GenericCard from "../components/GenericCard";
 import detailsHeaderImage from "../../../assets/detailsHeaderImage.svg";
 import { firestore } from "../../utils/utils";
+import { DeviceSmartphones } from "../../utils/devices";
 interface Props {
   children: React.ReactNode;
 }
@@ -105,9 +106,7 @@ export default function Details() {
   console.log(selectedData);
   return (
     <div style={{ backgroundColor: "#B3B3B3" }}>
-      <div
-        style={{ marginLeft: 90, marginRight: 90, backgroundColor: "#FFFFFF" }}
-      >
+      <div className={sideMarginStyle}>
         <Grid container>
           <NavBar />
           <Grid item xs={12}>
@@ -182,9 +181,27 @@ export default function Details() {
   );
 }
 
-const boxStyle = style({
-  margin: 50,
-});
+const sideMarginStyle = style(
+  {
+    marginLeft: 90,
+    marginRight: 90,
+    backgroundColor: "#FFFFFF",
+  },
+  media(DeviceSmartphones, {
+    marginLeft: 0,
+    marginRight: 0,
+    backgroundColor: "#FFFFFF",
+  })
+);
+
+const boxStyle = style(
+  {
+    margin: 50,
+  },
+  media(DeviceSmartphones, {
+    marginTop: 0,
+  })
+);
 
 const modalStyle = style({
   position: "absolute",

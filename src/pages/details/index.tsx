@@ -2,7 +2,7 @@ import React, { FC, useEffect } from "react";
 import { Button, Grid } from "@mui/material";
 import Divider from "@mui/material/Divider";
 import GenericText from "../components/GenericText";
-import { style } from "typestyle";
+import { media, style } from "typestyle";
 import {
   motion,
   useAnimation,
@@ -18,6 +18,7 @@ import bari from "../../../assets/bari.svg";
 import NavBar from "../components/NavBar";
 import classnames from "classnames";
 import Footer from "../components/GenericFooter";
+import { DeviceSmartphones } from "../../utils/devices";
 
 interface Props {
   children: React.ReactNode;
@@ -80,9 +81,7 @@ export default function Details() {
 
   return (
     <div style={{ backgroundColor: "#B3B3B3" }}>
-      <div
-        style={{ marginLeft: 90, marginRight: 90, backgroundColor: "#B3B3B3" }}
-      >
+      <div className={sideMarginStyle}>
         <Grid container>
           <NavBar />
           <Grid item xs={12}>
@@ -124,7 +123,7 @@ export default function Details() {
               alignItems="center"
               justifyContent="center"
             >
-              <img src={caviar} />
+              <img src={caviar} className={caviarImageStyle} />
             </Grid>
           </Grid>
           <div style={{ backgroundColor: "#0F0F20" }}>
@@ -265,6 +264,19 @@ export default function Details() {
     </div>
   );
 }
+const sideMarginStyle = style(
+  {
+    marginLeft: 90,
+    marginRight: 90,
+    backgroundColor: "#B3B3B3",
+  },
+  media(DeviceSmartphones, { marginLeft: 0, marginRight: 0 })
+);
+
+const caviarImageStyle = style(
+  {},
+  media(DeviceSmartphones, { width: "100%", marginTop: 30 })
+);
 
 const titleStyle = style({
   color: "#D99D55",
