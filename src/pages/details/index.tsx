@@ -11,6 +11,8 @@ import {
   useViewportScroll,
 } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 import detailsHeaderImage from "../../../assets/detailsHeaderImage.svg";
 import caviar from "../../../assets/caviar.svg";
@@ -126,22 +128,27 @@ export default function Details() {
               <img src={caviar} className={caviarImageStyle} />
             </Grid>
           </Grid>
-          <div style={{ backgroundColor: "#0F0F20" }}>
-            <FadeInWhenVisible>
-              <Grid container className={caviarDetailsContainer}>
-                <Grid
-                  item
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                  xs={12}
-                  sm={3}
-                  md={3}
-                  lg={3}
-                >
+          <div style={{ backgroundColor: "#0F0F20", width: "100%" }}>
+            <Carousel autoPlay={true} infiniteLoop={true} showStatus={false}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  margin: "55px",
+                }}
+              >
+                <div>
                   <img src={bari} style={{ width: "141px" }} />
-                </Grid>
-                <Grid item xs={12} sm={8} md={9} lg={8}>
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
                   <h1 className={titleStyle}>Caviar Bari</h1>
                   <GenericText
                     className={classnames(textStyle, customWhiteTextStyle)}
@@ -156,83 +163,81 @@ export default function Details() {
                     avec une texture délicate. Ses nuances sont de couleurs
                     assez sombres au goût minéral franc et iodé.
                   </GenericText>
-                </Grid>
-              </Grid>
-            </FadeInWhenVisible>
-            <Grid item xs={12} display="flex" justifyContent="center">
-              <Divider
-                variant="middle"
-                style={{ width: "80%", backgroundColor: "white" }}
-              />
-            </Grid>
-
-            <Grid container className={caviarDetailsContainer}>
-              <Grid
-                item
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                xs={12}
-                sm={3}
-                md={3}
-                lg={3}
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  margin: "55px",
+                }}
               >
-                <img src={bari} style={{ width: "141px" }} />
-              </Grid>
-              <Grid item xs={12} sm={8} md={9} lg={8}>
-                <h1 className={titleStyle}>Caviar Oscietre</h1>
-                <GenericText
-                  className={classnames(textStyle, customWhiteTextStyle)}
+                <div>
+                  <img src={bari} style={{ width: "141px" }} />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
-                  Le caviar Osciètre est issu de l’esturgeon Guidenstaedti et
-                  Acipenser et Persicus. Ce poisson est endémique de la mer
-                  Caspienne et la mer noire. Il a une taille moyenne mesurant de
-                  1,5m à 2m. Son poids varie de 80Kg à 200Kg. Il faut 8 à 9ans
-                  pour élever cet esturgeons à maturité sexuelle. Ses grains
-                  délivrés sont moyens, fermes et fondants à la fois. La couleur
-                  de ce caviar peut aller d’un gris anthracite à une couleur
-                  mordoré. Sa saveur particulièrement délicate présente des
-                  notes de noisette avec une belle longueur en bouche.
-                </GenericText>
-              </Grid>
-            </Grid>
-            <Grid item xs={12} display="flex" justifyContent="center">
-              <Divider
-                variant="middle"
-                style={{ width: "80%", backgroundColor: "white" }}
-              />
-            </Grid>
-            <Grid container className={caviarDetailsContainer}>
-              <Grid
-                item
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                xs={12}
-                sm={3}
-                md={3}
-                lg={3}
+                  <h1 className={titleStyle}>Caviar Oscietre</h1>
+                  <GenericText
+                    className={classnames(textStyle, customWhiteTextStyle)}
+                  >
+                    Le caviar Osciètre est issu de l’esturgeon Guidenstaedti et
+                    Acipenser et Persicus. Ce poisson est endémique de la mer
+                    Caspienne et la mer noire. Il a une taille moyenne mesurant
+                    de 1,5m à 2m. Son poids varie de 80Kg à 200Kg. Il faut 8 à
+                    9ans pour élever cet esturgeons à maturité sexuelle. Ses
+                    grains délivrés sont moyens, fermes et fondants à la fois.
+                    La couleur de ce caviar peut aller d’un gris anthracite à
+                    une couleur mordoré. Sa saveur particulièrement délicate
+                    présente des notes de noisette avec une belle longueur en
+                    bouche.
+                  </GenericText>
+                </div>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  margin: "55px",
+                }}
               >
-                <img src={bari} style={{ width: "141px" }} />
-              </Grid>
-              <Grid item xs={12} sm={8} md={8} lg={8}>
-                <h1 className={titleStyle}> Caviar Schrenki </h1>
-                <GenericText
-                  className={classnames(textStyle, customWhiteTextStyle)}
+                <div>
+                  <img src={bari} style={{ width: "141px" }} />
+                </div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                 >
-                  Le caviar Schrenki est issu de l’esturgeon Acipenser Dauricus
-                  Schrenki. Ce poisson vit à l’état dauvage sur le fleuve Amour
-                  séparant la Russie de la Chine. Sa taille varie de 1,2m à 2m
-                  et son poids peut atteindre plus de 100Kg. Il atteint sa
-                  maturité sexuelle en élevage autour des 9ans, période
-                  nécessaire pour nous délivrer un caviar envoutant et unique.
-                  Ses grains sont de taille moyenne et fermes arborant une
-                  sublime couleur dorée. Faiblement iodé et peu salé, il séduit
-                  par ses notes sensuelles. Un produit d’exception qui a la
-                  faveur des grands chefs.
-                </GenericText>
-              </Grid>
-            </Grid>
+                  <h1 className={titleStyle}> Caviar Schrenki </h1>
+                  <GenericText
+                    className={classnames(textStyle, customWhiteTextStyle)}
+                  >
+                    Le caviar Schrenki est issu de l’esturgeon Acipenser
+                    Dauricus Schrenki. Ce poisson vit à l’état dauvage sur le
+                    fleuve Amour séparant la Russie de la Chine. Sa taille varie
+                    de 1,2m à 2m et son poids peut atteindre plus de 100Kg. Il
+                    atteint sa maturité sexuelle en élevage autour des 9ans,
+                    période nécessaire pour nous délivrer un caviar envoutant et
+                    unique. Ses grains sont de taille moyenne et fermes arborant
+                    une sublime couleur dorée. Faiblement iodé et peu salé, il
+                    séduit par ses notes sensuelles. Un produit d’exception qui
+                    a la faveur des grands chefs.
+                  </GenericText>
+                </div>
+              </div>
+            </Carousel>
           </div>
           <Grid
             alignItems={"center"}
@@ -259,8 +264,9 @@ export default function Details() {
             </Button>
           </Grid>
         </Grid>
-        <Footer />
       </div>
+
+      <Footer />
     </div>
   );
 }
@@ -298,4 +304,5 @@ const caviarDetailsContainer = style({
 
 const customWhiteTextStyle = style({
   color: "#FFFFFF",
+  width: "85%",
 });
