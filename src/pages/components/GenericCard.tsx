@@ -13,6 +13,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   DeviceSmartphones,
   DeviceSmartphonesExtraSmall,
+  DeviceTabletsPortrait,
 } from "../../utils/devices";
 
 export interface GenericCardProps {
@@ -34,7 +35,7 @@ const GenericCard = ({
   };
   return (
     <Card className={cardStyle}>
-      <CardActionArea onClick={() => onPress()}>
+      <CardActionArea style={{ paddingLeft: 0 }} onClick={() => onPress()}>
         <CardMedia
           component="img"
           width="370px"
@@ -66,17 +67,26 @@ const cardStyle = style(
       },
     },
   },
-  media(DeviceSmartphones, {
+  media(DeviceTabletsPortrait, {
+    paddingLeft: "0 !important",
     $nest: {
       ".imageStyle": {
         height: 300,
         width: 300,
-        paddingLeft: 0,
+      },
+    },
+  }),
+  media(DeviceSmartphones, {
+    paddingLeft: "0 !important",
+    $nest: {
+      ".imageStyle": {
+        height: 300,
+        width: 300,
       },
     },
   }),
   media(DeviceSmartphonesExtraSmall, {
-    paddingLeft: 0,
+    paddingLeft: "0 !important",
   })
 );
 

@@ -122,6 +122,7 @@ export default function Details() {
                 fontFamily: "Cookie",
                 color: "#D99D55",
                 marginBottom: "3.5%",
+                fontSize: 48,
               }}
             >
               Nos derniers évenements
@@ -194,14 +195,9 @@ const sideMarginStyle = style(
   })
 );
 
-const boxStyle = style(
-  {
-    margin: 50,
-  },
-  media(DeviceSmartphones, {
-    marginTop: 0,
-  })
-);
+const boxStyle = style({
+  margin: "0px 50px 50px",
+});
 
 const modalStyle = style({
   position: "absolute",

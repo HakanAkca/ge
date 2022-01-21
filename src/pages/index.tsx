@@ -15,7 +15,7 @@ import { DeviceSmartphones } from "../utils/devices";
 
 const IndexPage = () => {
   return (
-    <div style={{ backgroundColor: "#B3B3B3" }}>
+    <div style={{ backgroundColor: "#2A2A3A" }}>
       <div className={sideMarginStyle}>
         <NavBar />
         <Grid container style={{ overflow: "hidden" }}>
@@ -129,38 +129,6 @@ const IndexPage = () => {
               </Button>
             </Grid>
           </Grid>
-
-          <Grid
-            container
-            style={{ backgroundColor: "#FFFFFF" }}
-            className={containerStyle}
-          >
-            <Grid item xs={12} className={globalPaddingStyle}>
-              <img
-                style={{ float: "left", marginRight: 20 }}
-                src={gevy}
-                alt="Pineapple"
-              />
-              <h1 style={{ marginTop: 0 }}>La fondatrice</h1>
-              <GenericText className={textStyle}>
-                Riche d’une expérience professionnelle internationale, la
-                créatrice de Gourmet Events a toujours côtoyé les univers
-                raffinés du luxe et de la gastronomie. <br />
-                <br /> Son histoire personnelle, sa curiosité et sa générosité
-                sont à l’origine de son désir de partager son amour de la perle
-                noire... <br />
-                <br /> C’est donc à travers l’atmosphère festive de son concept
-                de bar à caviar qu’elle proposera à vos convives une expérience
-                gustative mémorable.
-                <br />
-                <br /> Avec un service à la royale Gourmet Events met à
-                l’honneur le diamant noir car nul besoin d’apparat pour ce
-                précieux met ; quelques grains déposés sur le dos de votre main
-                en guise d’écrin feront voyager vos papilles. Le goût brut de
-                l’instant...la saveur de l’éternité à fleur de peau ...
-              </GenericText>
-            </Grid>
-          </Grid>
         </Grid>
         <InstagramImage />
         <Footer />
@@ -171,8 +139,8 @@ const IndexPage = () => {
 
 const sideMarginStyle = style(
   {
-    marginLeft: 90,
-    marginRight: 90,
+    marginLeft: 150,
+    marginRight: 150,
     backgroundColor: "#B3B3B3",
   },
   media(DeviceSmartphones, { marginLeft: 0, marginRight: 0 })
