@@ -165,13 +165,6 @@ export default function Contact() {
     <>
       <Grid container>
         <NavBar />
-        {/* <Grid item xs={12}>
-          <motion.img
-            ref={ref}
-            src={detailsHeaderImage}
-            style={{ width: "100%", opacity }}
-          />
-        </Grid> */}
         <Grid
           className={marginGridStyle}
           container

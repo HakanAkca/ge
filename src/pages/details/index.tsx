@@ -82,7 +82,7 @@ export default function Details() {
   const opacity = useSpring(yRange, { stiffness: 400, damping: 40 });
 
   return (
-    <div style={{ backgroundColor: "#B3B3B3" }}>
+    <div style={{ backgroundColor: "#2A2A3A" }}>
       <div className={sideMarginStyle}>
         <Grid container>
           <NavBar />
@@ -129,6 +129,7 @@ export default function Details() {
             </Grid>
           </Grid>
           <div style={{ backgroundColor: "#0F0F20", width: "100%" }}>
+            <div id="les-caviars"></div>
             <Carousel autoPlay={true} infiniteLoop={true} showStatus={false}>
               <div
                 style={{
@@ -149,7 +150,7 @@ export default function Details() {
                     justifyContent: "center",
                   }}
                 >
-                  <h1 className={titleStyle}>Caviar Bari</h1>
+                  <h1 className={titleStyle}>Caviar Baeri</h1>
                   <GenericText
                     className={classnames(textStyle, customWhiteTextStyle)}
                   >
@@ -272,8 +273,8 @@ export default function Details() {
 }
 const sideMarginStyle = style(
   {
-    marginLeft: 90,
-    marginRight: 90,
+    marginLeft: 150,
+    marginRight: 150,
     backgroundColor: "#B3B3B3",
   },
   media(DeviceSmartphones, { marginLeft: 0, marginRight: 0 })

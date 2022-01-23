@@ -38,8 +38,6 @@ const GenericCard = ({
       <CardActionArea style={{ paddingLeft: 0 }} onClick={() => onPress()}>
         <CardMedia
           component="img"
-          width="370px"
-          height="302px"
           alt="green iguana"
           src={data && data.coverUrl}
           className="imageStyle"
@@ -59,6 +57,10 @@ const cardStyle = style(
     width: "max-content",
     borderRadius: 1,
     $nest: {
+      ".imageStyle": {
+        width: "370px",
+        height: "302px",
+      },
       "&:hover .hover-text-style": {
         display: "block !important",
       },

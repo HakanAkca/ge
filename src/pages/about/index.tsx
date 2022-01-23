@@ -73,7 +73,7 @@ const titleStyle = style({
 });
 
 const globalPaddingStyle = style({
-  padding: 50,
+  padding: "0 50px 50px",
 });
 
 const containerStyle = style({

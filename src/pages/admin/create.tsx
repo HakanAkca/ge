@@ -26,6 +26,7 @@ import {
 
 const Create = () => {
   const [image, setImage] = useState(null);
+  const [imageMultiple, setMultipleImage] = useState(null);
   const [url, setUrl] = useState("");
   const [progress, setProgress] = useState(0);
 
@@ -36,6 +37,7 @@ const Create = () => {
       description: values.description,
       date: values.date,
       coverUrl: url,
+      multipleImageUrl: imageMultiple,
     });
   };
 
@@ -44,6 +46,7 @@ const Create = () => {
       setImage(e);
       const storage = getStorage();
       const storageRef = ref(storage, `images/${e.name}`);
+      console.log(e);
       const uploadTask = uploadBytesResumable(storageRef, e);
 
       uploadTask.on("state_changed", (snapshot: any) => {
@@ -53,6 +56,30 @@ const Create = () => {
       });
     }
   };
+
+  const uploadMultipleImages = (e) => {
+    const data = [];
+    if (e) {
+      setMultipleImage(e);
+      const storage = getStorage();
+      Array.from(e).forEach((file) => {
+        const storageRef = ref(storage, `images/${file.name}`);
+        uploadBytesResumable(storageRef, file)
+          .then((e) => {
+            getDownloadURL(e.ref)
+              .then((URL) => {
+                console.log("URL", URL);
+                data.push(URL);
+              })
+              .catch((e) => console.log(e));
+          })
+          .catch((e) => console.log(e));
+      });
+      setMultipleImage(data);
+    }
+  };
+
+  console.log("HERE", imageMultiple);
 
   return (
     <Grid
@@ -116,10 +143,8 @@ const Create = () => {
                 id="description"
                 name="description"
                 maxRows={4}
-                aria-label="maximum height"
-                placeholder="Maximum 4 rows"
-                defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                    ut labore et dolore magna aliqua."
+                aria-label="Description"
+                placeholder="Description"
                 style={{ width: "100%", height: 200 }}
               />
 
@@ -131,6 +156,18 @@ const Create = () => {
                 <input
                   type="file"
                   onChange={(e) => handleChangeImage(e.target.files[0])}
+                />
+              </Grid>
+              <Grid item>
+                <InputLabel style={{ marginTop: 50 }}>
+                  Listes des photos
+                </InputLabel>
+                <input
+                  type="file"
+                  id="file"
+                  multiple
+                  name="file"
+                  onChange={(e) => uploadMultipleImages(e.target.files)}
                 />
               </Grid>
 

@@ -17,6 +17,8 @@ import GenericCard from "../components/GenericCard";
 import detailsHeaderImage from "../../../assets/detailsHeaderImage.svg";
 import { firestore } from "../../utils/utils";
 import { DeviceSmartphones } from "../../utils/devices";
+import { Carousel } from "react-responsive-carousel";
+import GenericText from "../components/GenericText";
 interface Props {
   children: React.ReactNode;
 }
@@ -94,6 +96,7 @@ export default function Details() {
         date: doc.data().date,
         description: doc.data().description,
         coverUrl: doc.data().coverUrl,
+        multipleImageUrl: doc.data().multipleImageUrl,
       });
     });
     setData(data);
@@ -103,9 +106,9 @@ export default function Details() {
   const { scrollY } = useViewportScroll();
   const yRange = useTransform(scrollY, [imageHeight - offsetHeight, 0], [0, 1]);
   const opacity = useSpring(yRange, { stiffness: 400, damping: 40 });
-  console.log(selectedData);
+  console.log("SELECTED DATA", selectedData);
   return (
-    <div style={{ backgroundColor: "#B3B3B3" }}>
+    <div style={{ backgroundColor: "#2A2A3A" }}>
       <div className={sideMarginStyle}>
         <Grid container>
           <NavBar />
@@ -170,12 +173,21 @@ export default function Details() {
         aria-describedby="modal-modal-description"
       >
         <Box className={modalStyle}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <Carousel showStatus={false} showThumbs={false}>
+            {selectedData &&
+              selectedData.multipleImageUrl &&
+              selectedData.multipleImageUrl.length > 0 &&
+              selectedData.multipleImageUrl.map((x) => {
+                return (
+                  <>
+                    <img src={x} />
+                    <GenericText className={modalDescriptionStyle}>
+                      {selectedData && selectedData.description}
+                    </GenericText>
+                  </>
+                );
+              })}
+          </Carousel>
         </Box>
       </Modal>
     </div>
@@ -184,8 +196,8 @@ export default function Details() {
 
 const sideMarginStyle = style(
   {
-    marginLeft: 90,
-    marginRight: 90,
+    marginLeft: 150,
+    marginRight: 150,
     backgroundColor: "#FFFFFF",
   },
   media(DeviceSmartphones, {
@@ -204,9 +216,11 @@ const modalStyle = style({
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
+  width: 958,
+});
+
+const modalDescriptionStyle = style({
+  fontSize: 18,
+  backgroundColor: "#0F0F20",
+  padding: 15,
 });

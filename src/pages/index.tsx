@@ -13,6 +13,8 @@ import InstagramImage from "./components/InstagramImage";
 import logo from "../images/logo.png";
 import { DeviceSmartphones } from "../utils/devices";
 
+import detailsHeaderImage from "../../assets/detailsHeaderImage.svg";
+
 const IndexPage = () => {
   return (
     <div style={{ backgroundColor: "#2A2A3A" }}>
@@ -21,7 +23,7 @@ const IndexPage = () => {
         <Grid container style={{ overflow: "hidden" }}>
           <Grid item xs={12}>
             <img
-              src={homeHeaderImage}
+              src={detailsHeaderImage}
               style={{ width: "100%", height: "100%" }}
             />
           </Grid>
@@ -36,6 +38,7 @@ const IndexPage = () => {
                 style={{ float: "right", marginRight: 20 }}
                 src={logo}
                 alt="Logo caviar"
+                className="rotate"
               />
               <h1>Optez pour un bar à Caviar !</h1>
               <GenericText className={textStyle}>
@@ -85,7 +88,7 @@ const IndexPage = () => {
                 style={{ marginTop: 25 }}
               >
                 <img src={bari} style={{ width: "241px" }} />
-                <GenericText className={caviarTextStyle}>BARI</GenericText>
+                <GenericText className={caviarTextStyle}>Baeri</GenericText>
               </Grid>
               <Grid
                 display="flex"
@@ -123,7 +126,7 @@ const IndexPage = () => {
                   height: 50,
                 }}
                 variant="outlined"
-                href="/details"
+                href="/details#les-caviars"
               >
                 DÉCOUVEZ NOS CAVIARDS
               </Button>

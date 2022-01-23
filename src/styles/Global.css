@@ -1,7 +1,7 @@
 body {
   padding: 0px;
   margin: 0px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
 }
 
 ul {
@@ -9,8 +9,8 @@ ul {
   margin: 0;
   padding: 0;
 }
-/* 
-.react-multi-carousel-item {
-  max-width: 0;
-  min-width: 0;
-} */
+
+.carousel .slide img {
+  max-height: 620px; /* change this to whatever you want */
+  object-fit: cover;
+}
