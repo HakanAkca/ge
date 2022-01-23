@@ -191,6 +191,7 @@ export default function Contact() {
                 typePerson: "",
               }}
               validationSchema={SignupSchema}
+              validateOnMount={true}
               onSubmit={() => {}}
             >
               {({
@@ -202,6 +203,7 @@ export default function Contact() {
                 errors,
                 touched,
                 isValid,
+                dirty,
               }) => {
                 return (
                   <Form>
@@ -366,7 +368,7 @@ export default function Contact() {
                           backgroundColor: "#D99D55",
                           marginTop: 30,
                         }}
-                        disabled={!isValid || isSubmitting}
+                        disabled={!isValid || isSubmitting || dirty}
                         loading={isSubmitting}
                         variant="contained"
                         type="submit"
@@ -380,98 +382,6 @@ export default function Contact() {
                   </Form>
                 );
               }}
-            </Formik>
-          </Grid>
-          <Grid item xs={12} sm={12} md={12} lg={5} xl={5}>
-            <Formik
-              initialValues={{ name: "", number: "", email: "", message: "" }}
-              onSubmit={(values) => {
-                handleSubmitSecondForm(values);
-              }}
-            >
-              {({
-                values,
-                errors,
-                touched,
-                handleChange,
-                handleBlur,
-                handleSubmit,
-                setFieldValue,
-                isSubmitting,
-                /* and other goodies */
-              }) => (
-                <form onSubmit={handleSubmit}>
-                  <h1 style={{ fontFamily: "Cookie", color: "#D99D55" }}>
-                    Contactez-nous
-                  </h1>
-                  <GenericText className={genericTextStyle}>
-                    Contactez-nous via le formulaire de contact, pour toute
-                    demande de renseignements
-                  </GenericText>
-                  <TextField
-                    placeholder="Nom"
-                    style={{ marginTop: 10 }}
-                    fullWidth
-                    name="name"
-                    variant="outlined"
-                    onChange={(e) => {
-                      setFieldValue("name", e.target.value);
-                    }}
-                  />
-                  <TextField
-                    placeholder="Numéro de téléphone"
-                    style={{ marginTop: 10 }}
-                    fullWidth
-                    name="number"
-                    variant="outlined"
-                    onChange={(e) => {
-                      setFieldValue("number", e.target.value);
-                    }}
-                  />
-
-                  <TextField
-                    placeholder="Email"
-                    style={{ marginTop: 10 }}
-                    fullWidth
-                    name="email"
-                    variant="outlined"
-                    onChange={(e) => {
-                      setFieldValue("email", e.target.value);
-                    }}
-                  />
-
-                  <TextField
-                    style={{ marginTop: 10 }}
-                    multiline
-                    rows={6}
-                    maxRows={10}
-                    fullWidth
-                    name="message"
-                    onChange={(e) => {
-                      setFieldValue("message", e.target.value);
-                    }}
-                  />
-                  <Grid
-                    item
-                    xs={12}
-                    alignItems={"center"}
-                    display="flex"
-                    justifyContent="center"
-                  >
-                    <Button
-                      style={{
-                        width: 200,
-                        backgroundColor: "#D99D55",
-                        marginTop: 30,
-                      }}
-                      variant="contained"
-                      type="submit"
-                    >
-                      ENVOYEZ
-                    </Button>
-                  </Grid>
-                </form>
-              )}
             </Formik>
           </Grid>
         </Grid>
