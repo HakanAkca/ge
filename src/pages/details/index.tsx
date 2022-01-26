@@ -20,7 +20,14 @@ import bari from "../../../assets/bari.svg";
 import NavBar from "../components/NavBar";
 import classnames from "classnames";
 import Footer from "../components/GenericFooter";
-import { DeviceSmartphones } from "../../utils/devices";
+import {
+  DeviceLRTablets,
+  DeviceSmallDesktop,
+  DeviceSmartphones,
+  DeviceSmartphonesExtraSmall,
+  DeviceTabletsLandscape,
+  DeviceTabletsPortrait,
+} from "../../utils/devices";
 
 interface Props {
   children: React.ReactNode;
@@ -104,7 +111,7 @@ export default function Details() {
             alignItems="center"
             className={caviarDetailsContainer}
           >
-            <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+            <Grid item xs={12} sm={12} md={12} lg={6} xl={4}>
               <h1 className={titleStyle}>Nos bars à caviar</h1>
               <GenericText className={textStyle}>
                 Nos bars à caviar Chaque espèce d’esturgeons à ses
@@ -118,14 +125,14 @@ export default function Details() {
               item
               xs={12}
               sm={0}
-              md={6}
+              md={12}
               lg={6}
               xl={4}
               display="flex"
               alignItems="center"
               justifyContent="center"
             >
-              <img src={caviar} className={caviarImageStyle} />
+              <img src={caviar} className={caviarHandImgStyle} />
             </Grid>
           </Grid>
           <div style={{ backgroundColor: "#0F0F20", width: "100%" }}>
@@ -251,15 +258,9 @@ export default function Details() {
           >
             <h2>SI VOUS ÊTES INTÉRESSEZ</h2>
             <Button
-              style={{
-                backgroundColor: "#D99D55",
-                color: "#FFFFFF",
-                borderRadius: 0,
-                width: 340,
-                height: 50,
-              }}
               variant="outlined"
               href="/contact"
+              className={contactButtonStyle}
             >
               Contactez-nous
             </Button>
@@ -307,3 +308,29 @@ const customWhiteTextStyle = style({
   color: "#FFFFFF",
   width: "85%",
 });
+
+const caviarHandImgStyle = style(
+  { width: 350 },
+  media(DeviceSmallDesktop, {
+    marginTop: 50,
+    width: 450,
+  }),
+  media(DeviceLRTablets, {
+    marginTop: 50,
+  }),
+  media(DeviceSmartphones, {
+    marginTop: 50,
+  }),
+  media(DeviceSmartphonesExtraSmall, { width: 250, marginTop: 25 })
+);
+
+const contactButtonStyle = style(
+  {
+    backgroundColor: "#D99D55 !important",
+    color: "#FFFFFF !important",
+    borderRadius: "0px !important",
+    width: 340,
+    height: 50,
+  },
+  media(DeviceSmartphonesExtraSmall, { width: 250 })
+);
