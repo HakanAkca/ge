@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
-import { style } from "typestyle";
+import { media, style } from "typestyle";
+import { DeviceLRTablets } from "../../utils/devices";
 
 export interface GenericTextProps {
   className?: string;
@@ -20,13 +21,19 @@ export default class GenericText extends React.Component<
   }
 }
 
-const genericTextStyle = style({
-  fontFamily: "Roboto",
-  fontSize: "24px",
-  fontStyle: "normal",
-  fontWeight: 400,
-  lineHeight: "31px",
-  letterSpacing: "0em",
-  textAlign: "left",
-  color: "#FFF",
-});
+const genericTextStyle = style(
+  {
+    fontFamily: "Roboto",
+    fontSize: "24px",
+    fontStyle: "normal",
+    fontWeight: 400,
+    lineHeight: "31px",
+    letterSpacing: "0em",
+    textAlign: "left",
+    color: "#FFF",
+  },
+  media(DeviceLRTablets, {
+    fontSize: 20,
+    lineHeight: "normal !important",
+  })
+);

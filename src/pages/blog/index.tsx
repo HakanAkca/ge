@@ -173,7 +173,7 @@ export default function Details() {
         aria-describedby="modal-modal-description"
       >
         <Box className={modalStyle}>
-          <Carousel showStatus={false} showThumbs={false}>
+          <Carousel showStatus={false} showThumbs={false} thumbWidth={60}>
             {selectedData &&
               selectedData.multipleImageUrl &&
               selectedData.multipleImageUrl.length > 0 &&
@@ -216,7 +216,6 @@ const modalStyle = style({
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 958,
 });
 
 const modalDescriptionStyle = style({

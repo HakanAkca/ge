@@ -137,7 +137,7 @@ export default function Details() {
           </Grid>
           <div style={{ backgroundColor: "#0F0F20", width: "100%" }}>
             <div id="les-caviars"></div>
-            <Carousel infiniteLoop={true} showStatus={false}>
+            <Carousel infiniteLoop={true} showStatus={false} showThumbs={false}>
               <div
                 style={{
                   display: "flex",
@@ -147,7 +147,11 @@ export default function Details() {
                 }}
               >
                 <div>
-                  <img src={bari} style={{ width: "141px" }} />
+                  <img
+                    id="homePageSliderImg"
+                    src={bari}
+                    style={{ width: "141px" }}
+                  />
                 </div>
                 <div
                   style={{
@@ -182,7 +186,11 @@ export default function Details() {
                 }}
               >
                 <div>
-                  <img src={bari} style={{ width: "141px" }} />
+                  <img
+                    id="homePageSliderImg"
+                    src={bari}
+                    style={{ width: "141px" }}
+                  />
                 </div>
                 <div
                   style={{
@@ -218,7 +226,11 @@ export default function Details() {
                 }}
               >
                 <div>
-                  <img src={bari} style={{ width: "141px" }} />
+                  <img
+                    id="homePageSliderImg"
+                    src={bari}
+                    style={{ width: "141px" }}
+                  />
                 </div>
                 <div
                   style={{

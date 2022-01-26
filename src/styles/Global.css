@@ -27,12 +27,23 @@ ul {
   }
 }
 
+.control-dots {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .carousel .slider-wrapper {
     height: 800px;
   }
 
+  .carousel .slider .selected {
+    width: auto;
+  }
+
   .carousel .slide img {
+  }
+
+  #homePageSliderImg {
     display: none;
   }
 }
