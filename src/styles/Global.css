@@ -10,7 +10,29 @@ ul {
   padding: 0;
 }
 
-.carousel .slide img {
-  max-height: 620px; /* change this to whatever you want */
-  object-fit: cover;
+.carousel .slide {
+  width: 300px;
+}
+
+.rotate {
+  animation: rotatelogo 5s linear infinite;
+}
+
+@keyframes rotatelogo {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel .slider-wrapper {
+    height: 800px;
+  }
+
+  .carousel .slide img {
+    display: none;
+  }
 }

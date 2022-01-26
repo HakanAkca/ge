@@ -11,7 +11,7 @@ import gevy from "../images/gevy.png";
 import NavBar from "./components/NavBar";
 import InstagramImage from "./components/InstagramImage";
 import logo from "../images/logo.png";
-import { DeviceSmartphones } from "../utils/devices";
+import { DeviceLRTablets, DeviceSmartphones } from "../utils/devices";
 
 import detailsHeaderImage from "../../assets/detailsHeaderImage.svg";
 
@@ -33,23 +33,21 @@ const IndexPage = () => {
             style={{ backgroundColor: "#FFFFFF" }}
             className={globalPaddingStyle}
           >
-            <Grid>
-              <img
-                style={{ float: "right", marginRight: 20 }}
-                src={logo}
-                alt="Logo caviar"
-                className="rotate"
-              />
-              <h1>Optez pour un bar à Caviar !</h1>
+            <h1 className={caviarTextStyle}>Optez pour un bar à Caviar !</h1>
+            <Grid item className={caviarDescriptionStyle}>
               <GenericText className={textStyle}>
                 Notre maison vous accompagne pour célébrer vos événements
                 d’ordre privé ou corporate. <br />
                 <br />
                 Une aventure d’exception qui restera gravée dans l’esprit de vos
-                convives. Tel est l’objectif de Gourmet Events Paris.
+                convives. <br /> <br />
+                Tel est l’objectif de Gourmet Events Paris.
                 <br />
                 <br /> Car le caviar c’est vivre l’instant avec Art !
               </GenericText>
+              <div className={logoContainer}>
+                <img src={logo} alt="Logo caviar" className="rotate" />
+              </div>
             </Grid>
           </Grid>
           <Grid
@@ -85,7 +83,7 @@ const IndexPage = () => {
                 flexDirection="column"
                 alignItems="center"
                 justifyContent="center"
-                style={{ marginTop: 25 }}
+                style={{ marginTop: 50 }}
               >
                 <img src={bari} style={{ width: "241px" }} />
                 <GenericText className={caviarTextStyle}>Baeri</GenericText>
@@ -161,21 +159,29 @@ const customBlueBackground = style({
   background: "#040322",
 });
 
-const textStyle = style({
-  color: "black",
-  fontSize: 22,
-  fontFamily: "Roboto",
-  fontWeight: 400,
-});
+const textStyle = style(
+  {
+    color: "black",
+    fontSize: 22,
+    fontFamily: "Roboto",
+    fontWeight: 400,
+  },
+  media(DeviceSmartphones, {
+    textAlign: "center",
+  })
+);
 
 const customWhiteTextStyle = style({
-  color: "#FFFFFF",
+  color: "#FFFFFF !important",
   fontSize: 24,
   textAlign: "center",
 });
 
-const spaceTextStyle = style({
+const logoContainer = style({
   marginTop: 25,
+  alignItems: "center",
+  justifyContent: "center",
+  display: "flex",
 });
 
 const caviarTextStyle = style({
@@ -183,5 +189,18 @@ const caviarTextStyle = style({
   fontFamily: "Cookie",
   fontSize: "48px",
 });
+
+const caviarDescriptionStyle = style(
+  {
+    display: "flex",
+    flexDirection: "row",
+  },
+  media(DeviceLRTablets, {
+    flexDirection: "column !important",
+  }),
+  media(DeviceSmartphones, {
+    flexDirection: "column !important",
+  })
+);
 
 export default IndexPage;

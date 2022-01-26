@@ -130,7 +130,7 @@ export default function Details() {
           </Grid>
           <div style={{ backgroundColor: "#0F0F20", width: "100%" }}>
             <div id="les-caviars"></div>
-            <Carousel autoPlay={true} infiniteLoop={true} showStatus={false}>
+            <Carousel infiniteLoop={true} showStatus={false}>
               <div
                 style={{
                   display: "flex",
