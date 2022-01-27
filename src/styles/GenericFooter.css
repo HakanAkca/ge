@@ -1,39 +1,43 @@
 footer {
+  background-color: #0f0f20;
+}
+
+.footer-first {
   display: flex;
   flex-direction: column;
-  background-color: #0F0F20;
+  background-color: #0f0f20;
   padding: 16px;
 }
 
 @media screen and (min-width: 1024px) {
-  footer {
+  .footer-first {
     padding: 16px 48px;
     flex-direction: row;
     justify-content: space-between;
   }
 
-  footer form {
+  .footer-first form {
     max-width: 500px;
   }
 }
 
-footer .links img {
+.footer-first .links img {
   height: 80px;
 }
 
-footer .links ul {
+.footer-first .links ul {
   display: flex;
   flex-direction: column;
 }
 
-footer .links a {
-  color: #D99D55;
+.footer-first .links a {
+  color: #d99d55;
   display: inline-block;
   text-decoration: none;
   margin: 4px 0;
 }
 
-footer form {
+.footer-first form {
   color: #fff;
   padding: 0 48px;
   display: flex;
@@ -67,7 +71,7 @@ form .input-row textarea {
 
 form .input-row input::placeholder,
 form .input-row textarea::placeholder {
-  color: #D99D55;
+  color: #d99d55;
   font-weight: 300;
 }
 
@@ -89,28 +93,28 @@ form .input-row textarea:focus {
 @media screen and (min-width: 1024px) {
 }
 
-button[type=submit] {
+button[type="submit"] {
   display: inline;
   margin: auto;
   height: 40px;
   padding: 0 48px;
-  background-color: #D99D55;
+  background-color: #d99d55;
   color: #fff;
   border-radius: 2px;
   border: none;
   text-transform: uppercase;
 }
 
-footer .contact img {
+.footer-first .contact img {
   height: 20px;
   margin-right: 8px;
 }
 
-footer .contact p {
+.footer-first .contact p {
   display: flex;
   align-items: center;
 }
 
-footer .contact a {
+.footer-first .contact a {
   color: #fff;
 }

@@ -16,7 +16,7 @@ import GenericText from "../components/GenericText";
 import { style, media } from "typestyle";
 import { DeviceSmartphones } from "../../utils/devices";
 
-export default function About() {
+export default function Mentions() {
   const [lastYPos, setLastYPos] = React.useState(0);
   const [shouldShowActions, setShouldShowActions] = React.useState(false);
   const [imageHeight, getImageHeight] = React.useState<number>(0);
@@ -62,31 +62,44 @@ export default function About() {
             style={{ backgroundColor: "#FFFFFF" }}
             className={containerStyle}
           >
-            <h1 className={titleStyle}>Notre maison</h1>
+            <h1 className={titleStyle}>Mentions légales</h1>
             <Grid item xs={12} className={globalPaddingStyle}>
-              <img
-                style={{ float: "left", marginRight: 20 }}
-                src={gevy}
-                alt="Pineapple"
-              />
-              <h1 style={{ marginTop: 0 }}>La fondatrice</h1>
-              <GenericText className={textStyle}>
-                Riche d’une expérience professionnelle internationale, la
-                créatrice de Gourmet Events a toujours côtoyé les univers
-                raffinés du luxe et de la gastronomie. <br />
-                <br /> Son histoire personnelle, sa curiosité et sa générosité
-                sont à l’origine de son désir de partager son amour de la perle
-                noire... <br />
-                <br /> C’est donc à travers l’atmosphère festive de son concept
-                de bar à caviar qu’elle proposera à vos convives une expérience
-                gustative mémorable.
+              <div className={textStyle}>
+                <span>Raison ou dénomination sociale : GourmetEvents</span>
+                <br /> <br />
+                <span>Forme juridique : Société à responsabilité limitée</span>
                 <br />
-                <br /> Avec un service à la royale Gourmet Events met à
-                l’honneur le diamant noir car nul besoin d’apparat pour ce
-                précieux met ; quelques grains déposés sur le dos de votre main
-                en guise d’écrin feront voyager vos papilles. Le goût brut de
-                l’instant...la saveur de l’éternité à fleur de peau ...
-              </GenericText>
+                <br />
+                <span>
+                  Capital social : 2000,00€ Siret : 84451564300014 N°TVA
+                </span>
+                <br />
+                <br />
+                <span>intracommunautaire : FR61844515643</span>
+                <br />
+                <br />
+                <span>
+                  Responsable et directeur de publication : Gévy Estrampes
+                </span>
+                <br />
+                <br />
+                <span>
+                  Nous contacter : Siège social : 66 avenue des Champs Elysées
+                  75008 Paris Téléphone : - 01.89.16.41.80 - 06.71.60.94.25
+                  Contact@gourmeteventsparis.fr ge.gourmetevents@gmail.com
+                  www.(adresse du site){" "}
+                </span>
+                <br />
+                <br />
+                <span>
+                  Conformément à la loi N° 2004-575 du 21 juin 2004 pour la
+                  confiance dans l ‘économie numérique, nous vous informons que
+                  le dite internet www.(adresse du site) est la propriété de
+                  Gourmet Events. Les mentions Légales pouvant être modifiées à
+                  tout moment et sans préavis, nous vous engageons à les
+                  consulter régulièrement
+                </span>
+              </div>
             </Grid>
           </Grid>
         </Grid>
@@ -128,7 +141,7 @@ const textStyle = style({
   color: "black",
   fontSize: 22,
   fontFamily: "Roboto",
-  fontWeight: 400,
+  fontWeight: "normal",
 });
 
 const customWhiteTextStyle = style({

@@ -56,7 +56,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-export default function Details() {
+export default function Services() {
   const [lastYPos, setLastYPos] = React.useState(0);
   const [shouldShowActions, setShouldShowActions] = React.useState(false);
   const [imageHeight, getImageHeight] = React.useState<number>(0);
@@ -107,7 +107,7 @@ export default function Details() {
   const { scrollY } = useViewportScroll();
   const yRange = useTransform(scrollY, [imageHeight - offsetHeight, 0], [0, 1]);
   const opacity = useSpring(yRange, { stiffness: 400, damping: 40 });
-  console.log("SELECTED DATA", selectedData);
+
   return (
     <div style={{ backgroundColor: "#2A2A3A" }}>
       <div className={sideMarginStyle}>
@@ -121,7 +121,17 @@ export default function Details() {
             />
           </Grid>
           <Box className={boxStyle} sx={{ flexGrow: 1 }}>
-            <h1 className={titleStyle}>Nos derniers évenements</h1>
+            <h1
+              style={{
+                fontFamily: "Cookie",
+                color: "#D99D55",
+                marginBottom: "3.5%",
+                fontSize: 48,
+                fontWeight: "initial !important",
+              }}
+            >
+              Nos services
+            </h1>
             <Grid
               container
               spacing={{ xs: 2, md: 3 }}
@@ -156,7 +166,6 @@ export default function Details() {
                 ))}
             </Grid>
           </Box>
-
           <Footer />
         </Grid>
       </div>
@@ -187,14 +196,6 @@ export default function Details() {
     </div>
   );
 }
-
-const titleStyle = style({
-  fontFamily: "Cookie",
-  color: "#D99D55",
-  marginBottom: "3.5%",
-  fontSize: 48,
-  fontWeight: "normal",
-});
 
 const sideMarginStyle = style(
   {

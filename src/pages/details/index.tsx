@@ -278,12 +278,12 @@ export default function Details() {
             </Button>
           </Grid>
         </Grid>
+        <Footer />
       </div>
-
-      <Footer />
     </div>
   );
 }
+
 const sideMarginStyle = style(
   {
     marginLeft: 150,
@@ -302,6 +302,7 @@ const titleStyle = style({
   color: "#D99D55",
   fontFamily: "Cookie",
   fontSize: 48,
+  fontWeight: "normal",
 });
 
 const textStyle = style({

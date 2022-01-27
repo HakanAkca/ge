@@ -11,7 +11,11 @@ import gevy from "../images/gevy.png";
 import NavBar from "./components/NavBar";
 import InstagramImage from "./components/InstagramImage";
 import logo from "../images/logo.png";
-import { DeviceLRTablets, DeviceSmartphones } from "../utils/devices";
+import {
+  DeviceLRTablets,
+  DeviceSmartphones,
+  DeviceSmartphonesExtraSmall,
+} from "../utils/devices";
 
 import detailsHeaderImage from "../../assets/detailsHeaderImage.svg";
 
@@ -122,6 +126,7 @@ const IndexPage = () => {
                   borderRadius: 0,
                   width: 340,
                   height: 50,
+                  borderWidth: 0,
                 }}
                 variant="outlined"
                 href="/details#les-caviars"
@@ -131,12 +136,42 @@ const IndexPage = () => {
             </Grid>
           </Grid>
         </Grid>
+        <Grid
+          alignItems={"center"}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          style={{ height: 250, backgroundColor: "#FFFFFF" }}
+          item
+          xs={12}
+        >
+          <h2>SI VOUS ÊTES INTÉRESSEZ</h2>
+          <Button
+            variant="outlined"
+            href="/contact"
+            className={contactButtonStyle}
+          >
+            Contactez-nous
+          </Button>
+        </Grid>
         <InstagramImage />
         <Footer />
       </div>
     </div>
   );
 };
+
+const contactButtonStyle = style(
+  {
+    backgroundColor: "#D99D55 !important",
+    color: "#FFFFFF !important",
+    borderRadius: "0px !important",
+    width: 340,
+    height: 50,
+    borderWidth: "0px !important",
+  },
+  media(DeviceSmartphonesExtraSmall, { width: 250 })
+);
 
 const sideMarginStyle = style(
   {

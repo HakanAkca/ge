@@ -50,13 +50,13 @@ export default function Navbar() {
         >
           Nos bars à caviar
         </Link>
-        {/* <Link
+        <Link
           activeClassName={activeClassStyle}
           className={rc_nav_a}
-          to="/galery"
+          to="/services"
         >
-          Galerie
-        </Link> */}
+          Nos services
+        </Link>
         <Link
           activeClassName={activeClassStyle}
           className={rc_nav_a}
