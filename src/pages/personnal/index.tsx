@@ -65,39 +65,38 @@ export default function Personnal() {
             <h1 className={titleStyle}>Mentions légales</h1>
             <Grid item xs={12} className={globalPaddingStyle}>
               <div className={textStyle}>
-                <span>Raison ou dénomination sociale : GourmetEvents</span>
+                <span>
+                  Protection des données personnelles Conformément à la loi
+                  78-17 du 6 janvier 1978, dite loi informatique et liberté,
+                  vous disposez d’un droit d’accès individuel, de rectifications
+                  et de suppression de données nominatives qui vous concernent
+                  que Gourmet Events est amené à recueillir pour les demandes de
+                  devis.
+                </span>
                 <br /> <br />
-                <span>Forme juridique : Société à responsabilité limitée</span>
-                <br />
-                <br />
                 <span>
-                  Capital social : 2000,00€ Siret : 84451564300014 N°TVA
-                </span>
-                <br />
-                <br />
-                <span>intracommunautaire : FR61844515643</span>
-                <br />
-                <br />
-                <span>
-                  Responsable et directeur de publication : Gévy Estrampes
+                  Ces données demeurent à l’usage interne de la société Gourmet
+                  Events et ne peuvent être échangées, transférées, cédées ou
+                  vendues sur un support quelconque à des tiers.
                 </span>
                 <br />
                 <br />
                 <span>
-                  Nous contacter : Siège social : 66 avenue des Champs Elysées
-                  75008 Paris Téléphone : - 01.89.16.41.80 - 06.71.60.94.25
-                  Contact@gourmeteventsparis.fr ge.gourmetevents@gmail.com
-                  www.(adresse du site){" "}
+                  Conformément aux articles 39-40 de la loi « informatique et
+                  liberté » du 6 janvier 1978 toute personne physique ou morale
+                  justifiant de son identité à le droit d’accéder, de modifier,
+                  de rectifier ou de supprimer toute donnée la concernant. Pour
+                  exercer ses droits, l’utilisateur doit adresser sa demande par
+                  e-mail à contact@gourmeteventsparis.fr et joindre un
+                  justificatif d’identité.
                 </span>
                 <br />
                 <br />
                 <span>
-                  Conformément à la loi N° 2004-575 du 21 juin 2004 pour la
-                  confiance dans l ‘économie numérique, nous vous informons que
-                  le dite internet www.(adresse du site) est la propriété de
-                  Gourmet Events. Les mentions Légales pouvant être modifiées à
-                  tout moment et sans préavis, nous vous engageons à les
-                  consulter régulièrement
+                  Vos données personnelles sont collectées via le formulaire de
+                  contact et de demande de devis. Elles sont seulement
+                  enregistrées dans le fichier client pour l’usage exclusif de
+                  Gourmet Events.
                 </span>
               </div>
             </Grid>

@@ -6,6 +6,7 @@ body {
 
 * h1 {
   font-weight: normal;
+  margin-top: 0;
 }
 
 ul {
@@ -37,7 +38,7 @@ ul {
 
 @media (max-width: 768px) {
   .carousel .slider-wrapper {
-    height: 800px;
+    height: auto;
   }
 
   .carousel .slider .selected {
@@ -49,5 +50,11 @@ ul {
 
   #homePageSliderImg {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel .slider-wrapper {
+    height: auto;
   }
 }

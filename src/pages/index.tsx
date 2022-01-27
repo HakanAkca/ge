@@ -67,7 +67,7 @@ const IndexPage = () => {
               globalPaddingStyle
             )}
           >
-            <Grid item xs={12}>
+            <Grid item xs={12} className={descriptionCaviarStyle}>
               <GenericText
                 className={classnames(textStyle, customWhiteTextStyle)}
               >
@@ -87,9 +87,8 @@ const IndexPage = () => {
                 flexDirection="column"
                 alignItems="center"
                 justifyContent="center"
-                style={{ marginTop: 50 }}
               >
-                <img src={bari} style={{ width: "241px" }} />
+                <img src={bari} className={caviarImgStyle} />
                 <GenericText className={caviarTextStyle}>Baeri</GenericText>
               </Grid>
               <Grid
@@ -101,7 +100,7 @@ const IndexPage = () => {
                 xs={12}
                 md={4}
               >
-                <img src={bari} style={{ width: "241px" }} />
+                <img src={bari} className={caviarImgStyle} />
                 <GenericText className={caviarTextStyle}>Osciètre</GenericText>
               </Grid>
               <Grid
@@ -113,7 +112,7 @@ const IndexPage = () => {
                 xs={12}
                 md={4}
               >
-                <img src={bari} style={{ width: "241px" }} />
+                <img src={bari} className={caviarImgStyle} />
                 <GenericText className={caviarTextStyle}>Schrenki</GenericText>
               </Grid>
             </Grid>
@@ -201,16 +200,33 @@ const textStyle = style(
     fontFamily: "Roboto",
     fontWeight: 400,
   },
+
+  media(DeviceLRTablets, {
+    textAlign: "center",
+    fontSize: 20,
+    lineHeight: 20,
+  }),
   media(DeviceSmartphones, {
     textAlign: "center",
+    fontSize: 16,
+    lineHeight: "normal",
   })
 );
 
-const customWhiteTextStyle = style({
-  color: "#FFFFFF !important",
-  fontSize: 24,
-  textAlign: "center",
-});
+const customWhiteTextStyle = style(
+  {
+    color: "#FFFFFF !important",
+    fontSize: 24,
+    textAlign: "center",
+  },
+
+  media(DeviceLRTablets, {
+    fontSize: 18,
+  }),
+  media(DeviceSmartphones, {
+    fontSize: 18,
+  })
+);
 
 const logoContainer = style({
   marginTop: 25,
@@ -219,11 +235,16 @@ const logoContainer = style({
   display: "flex",
 });
 
-const caviarTextStyle = style({
-  color: "#D99D55",
-  fontFamily: "Cookie",
-  fontSize: "48px",
-});
+const caviarTextStyle = style(
+  {
+    color: "#D99D55",
+    fontFamily: "Cookie",
+    fontSize: "48px",
+  },
+  media(DeviceSmartphones, {
+    fontSize: 37,
+  })
+);
 
 const caviarDescriptionStyle = style(
   {
@@ -235,6 +256,30 @@ const caviarDescriptionStyle = style(
   }),
   media(DeviceSmartphones, {
     flexDirection: "column !important",
+  })
+);
+
+const caviarImgStyle = style(
+  {
+    width: 241,
+  },
+  media(DeviceLRTablets, {
+    width: 150,
+  }),
+  media(DeviceSmartphones, {
+    width: 125,
+  })
+);
+
+const descriptionCaviarStyle = style(
+  {
+    marginBottom: 85,
+  },
+  media(DeviceLRTablets, {
+    marginBottom: 20,
+  }),
+  media(DeviceSmartphones, {
+    marginBottom: 20,
   })
 );
 

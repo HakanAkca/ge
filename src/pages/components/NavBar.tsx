@@ -60,16 +60,16 @@ export default function Navbar() {
         <Link
           activeClassName={activeClassStyle}
           className={rc_nav_a}
-          to="/blog"
+          to="/about"
         >
-          Blog
+          Notre maison
         </Link>
         <Link
           activeClassName={activeClassStyle}
           className={rc_nav_a}
-          to="/about"
+          to="/blog"
         >
-          Notre maison
+          Blog
         </Link>
         <Link
           activeClassName={activeClassStyle}

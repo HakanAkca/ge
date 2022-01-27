@@ -85,8 +85,8 @@ export default function Footer() {
           backgroundColor: "#0F0F20",
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-around",
           marginTop: 50,
+          justifyContent: "center",
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
@@ -100,6 +100,7 @@ export default function Footer() {
             fontStyle: "italic",
             fontSize: 18,
             width: "80%",
+            marginLeft: 25,
           }}
         >
           L’abus d’alcool est dangereux pour la santé, consommez avec
